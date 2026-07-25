@@ -4,6 +4,31 @@ Running note of what's built and what's left, per the working conventions in
 `08-tech-stack-and-conventions.md`. Keep this updated; a new session should
 be able to resume from this file without re-reading the whole spec folder.
 
+## ✅ Real logo wired in; header switched to a light background
+
+The client's actual logo file (building icon + "ESG Engineering Services /
+We Build For You" wordmark, PNG with real alpha transparency) is now at
+`public/esg-logo.png`, replacing the placeholder "ES" box in
+`components/marketing/Header.tsx` — full lockup, untouched colors, per
+`01-design-system.md`'s "use as-is, don't recolor" instruction.
+
+The logo's charcoal (`#545454`, sampled directly from the file — matches
+our `--charcoal` token exactly) measured ~1.5:1 contrast against the
+header's `bg-charcoal-dark`, confirmed by an actual screenshot at header
+height (building icon and "Engineering Services" text nearly invisible,
+only the orange bits read). This is exactly the case
+`01-design-system.md` anticipates ("if contrast is too low... ask the
+client... rather than recoloring it yourself") — flagged it instead of
+silently fixing. User chose: switch the header to a light background
+(`bg-paper`) instead of supplying a reversed logo. Header is now the one
+light element sticky-pinned over the dark hero — a deliberate, common
+pattern (light nav over dark hero), not an oversight. Nav link colors and
+the mobile-menu trigger icon were updated to their light-background
+counterparts (`text-muted`/`hover:text-ink` for links, `text-ink` for the
+icon) accordingly; the mobile slide-in drawer itself stays dark (separate
+overlay panel, wasn't part of the contrast issue). Verified at both
+desktop and 375px mobile widths, including the open drawer state.
+
 ## ✅ Charcoal/orange design-system retrofit (01-design-system.md v2)
 
 `01-design-system.md` was properly rewritten this time (unlike the earlier

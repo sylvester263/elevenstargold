@@ -1,22 +1,16 @@
 import type { Metadata } from "next";
-import { Sora, Zilla_Slab, Inter, IBM_Plex_Mono } from "next/font/google";
+import { Sora, Inter, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 
-// Sora is the public-site display font — 01-design-system.md (charcoal/
-// orange revision). Zilla Slab is kept loaded, but only feeds
-// --font-display-admin now: app/admin/layout.tsx pins the admin panel's
-// --font-display back to it, since the admin panel is explicitly out of
-// scope for this retrofit and headings share one global CSS variable.
+// Sora is the site-wide display font — 01-design-system.md (charcoal/
+// orange revision) — Zilla Slab has been fully removed from the public
+// site. The admin panel's Zilla Slab preservation (--font-display-admin)
+// is loaded separately in app/admin/layout.tsx, scoped to that subtree
+// only, not here.
 const sora = Sora({
   variable: "--font-display",
   subsets: ["latin"],
   weight: ["600", "700", "800"],
-});
-
-const zillaSlab = Zilla_Slab({
-  variable: "--font-display-admin",
-  subsets: ["latin"],
-  weight: ["500", "600", "700"],
 });
 
 const inter = Inter({
@@ -43,7 +37,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${sora.variable} ${zillaSlab.variable} ${inter.variable} ${ibmPlexMono.variable} h-full antialiased`}
+      className={`${sora.variable} ${inter.variable} ${ibmPlexMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>

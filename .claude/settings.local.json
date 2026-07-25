@@ -77,7 +77,14 @@
       "Bash('/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe' --headless --disable-gpu '--screenshot=C:\\\\Users\\\\hp\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\D--elevenstar\\\\7a198b4f-3124-4f0f-b33e-79182693b904\\\\scratchpad\\\\retrofit-certs.png' --window-size=1280,1300 http://localhost:3000/certifications)",
       "Bash(\"/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe\" --headless --disable-gpu --remote-debugging-port=9334 --window-size=1280,900 \"http://localhost:3000/\")",
       "Bash('/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe' --headless --disable-gpu '--screenshot=C:\\\\Users\\\\hp\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\D--elevenstar\\\\7a198b4f-3124-4f0f-b33e-79182693b904\\\\scratchpad\\\\retrofit-mobile.png' --window-size=1280,4200 http://localhost:3000/)",
-      "Bash(powershell -Command \"Stop-Process -Id 16164 -Force -ErrorAction SilentlyContinue\")"
+      "Bash(powershell -Command \"Stop-Process -Id 16164 -Force -ErrorAction SilentlyContinue\")",
+      "Bash('/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe' --headless --disable-gpu '--screenshot=C:\\\\Users\\\\hp\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\D--elevenstar\\\\7a198b4f-3124-4f0f-b33e-79182693b904\\\\scratchpad\\\\verify-admin-font.png' --window-size=1280,700 http://localhost:3000/admin/login)",
+      "Bash('/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe' --headless --disable-gpu '--screenshot=C:\\\\Users\\\\hp\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\D--elevenstar\\\\7a198b4f-3124-4f0f-b33e-79182693b904\\\\scratchpad\\\\verify-home-font.png' --window-size=1280,500 http://localhost:3000/)",
+      "Bash('/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe' --headless --disable-gpu '--screenshot=C:\\\\Users\\\\hp\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\D--elevenstar\\\\7a198b4f-3124-4f0f-b33e-79182693b904\\\\scratchpad\\\\verify-logo-header.png' --window-size=1280,120 http://localhost:3000/)",
+      "Bash('/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe' --headless --disable-gpu '--screenshot=C:\\\\Users\\\\hp\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\D--elevenstar\\\\7a198b4f-3124-4f0f-b33e-79182693b904\\\\scratchpad\\\\verify-logo-light-header.png' --window-size=1280,150 http://localhost:3000/)",
+      "Bash('/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe' --headless --disable-gpu '--screenshot=C:\\\\Users\\\\hp\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\D--elevenstar\\\\7a198b4f-3124-4f0f-b33e-79182693b904\\\\scratchpad\\\\verify-logo-full.png' --window-size=1280,700 http://localhost:3000/)",
+      "Bash(\"/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe\" --headless --disable-gpu --remote-debugging-port=9335 --window-size=1280,900 \"http://localhost:3000/\")",
+      "Bash(powershell -Command \"Stop-Process -Id 3288 -Force -ErrorAction SilentlyContinue\")"
     ]
   },
   "enableAllProjectMcpServers": true,

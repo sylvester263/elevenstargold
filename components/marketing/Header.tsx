@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Menu } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import {
@@ -21,20 +22,17 @@ const NAV_LINKS = [
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-50 border-b border-line-dark bg-charcoal-dark">
+    <header className="sticky top-0 z-50 border-b border-line bg-paper">
       <div className="mx-auto flex max-w-[1160px] items-center justify-between px-8 py-4 max-[600px]:px-4">
-        <Link href="/" className="flex items-center gap-3">
-          <span className="flex h-10 w-10 shrink-0 items-center justify-center border border-orange font-display text-sm font-semibold text-orange">
-            ES
-          </span>
-          <span className="flex flex-col leading-tight">
-            <span className="font-display text-base font-semibold text-bg">
-              Eleven Star Gold
-            </span>
-            <span className="text-[10px] uppercase tracking-[0.14em] text-orange">
-              Engineering &amp; Construction
-            </span>
-          </span>
+        <Link href="/" className="flex shrink-0 items-center">
+          <Image
+            src="/esg-logo.png"
+            alt="ESG Engineering Services — We Build For You"
+            width={1262}
+            height={445}
+            priority
+            className="h-10 w-auto"
+          />
         </Link>
 
         <nav className="hidden items-center gap-8 min-[880px]:flex">
@@ -42,7 +40,7 @@ export function Header() {
             <Link
               key={link.href}
               href={link.href}
-              className="text-sm text-muted-light transition-colors hover:text-bg"
+              className="text-sm text-muted transition-colors hover:text-ink"
             >
               {link.label}
             </Link>
@@ -63,7 +61,7 @@ export function Header() {
           <Sheet>
             <SheetTrigger
               aria-label="Open menu"
-              className="flex size-9 items-center justify-center text-bg transition-colors hover:text-orange min-[880px]:hidden"
+              className="flex size-9 items-center justify-center text-ink transition-colors hover:text-orange min-[880px]:hidden"
             >
               <Menu className="size-5" />
             </SheetTrigger>
