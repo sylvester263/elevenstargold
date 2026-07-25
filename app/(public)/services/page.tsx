@@ -6,6 +6,7 @@ import { buildMetadata } from "@/lib/seo/metadata";
 import { SERVICE_CATEGORY } from "@/lib/service-category";
 import { slugify } from "@/lib/slug";
 import { services, servicesIntro, servicesClosing } from "@/content/site-copy";
+import { Reveal } from "@/components/marketing/Reveal";
 
 export const metadata: Metadata = buildMetadata({
   title: "Services",
@@ -37,27 +38,29 @@ export default function ServicesPage() {
             const id = slugify(service.name);
 
             return (
-              <div key={service.name} id={id} className="scroll-mt-24 py-10">
-                <div className="grid grid-cols-[80px_1fr] gap-8 max-[600px]:grid-cols-1 max-[600px]:gap-3">
-                  <span className="font-mono text-2xl text-gold">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <div>
-                    <h2 className="text-2xl text-ink">{service.name}</h2>
-                    <p className="mt-3 max-w-2xl text-muted">
-                      {service.description}
-                    </p>
-                    {category ? (
-                      <Link
-                        href={`/projects?category=${category.toLowerCase()}`}
-                        className="mt-4 inline-block text-sm font-medium text-gold hover:text-gold-bright"
-                      >
-                        See {category} projects delivered →
-                      </Link>
-                    ) : null}
+              <Reveal key={service.name} delay={Math.min(i * 40, 320)}>
+                <div id={id} className="scroll-mt-24 py-10">
+                  <div className="grid grid-cols-[80px_1fr] gap-8 max-[600px]:grid-cols-1 max-[600px]:gap-3">
+                    <span className="font-mono text-2xl text-orange">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <div>
+                      <h2 className="text-2xl text-ink">{service.name}</h2>
+                      <p className="mt-3 max-w-2xl text-muted">
+                        {service.description}
+                      </p>
+                      {category ? (
+                        <Link
+                          href={`/projects?category=${category.toLowerCase()}`}
+                          className="mt-4 inline-block text-sm font-medium text-orange hover:text-orange-dark"
+                        >
+                          See {category} projects delivered →
+                        </Link>
+                      ) : null}
+                    </div>
                   </div>
                 </div>
-              </div>
+              </Reveal>
             );
           })}
         </div>

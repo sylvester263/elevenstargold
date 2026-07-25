@@ -36,7 +36,7 @@ export function SectionHeader({
       )}
     >
       <div>
-        <p className="text-xs tracking-[0.14em] text-gold uppercase">
+        <p className="text-xs tracking-[0.14em] text-orange uppercase">
           {eyebrow}
         </p>
         <h2 className={cn("mt-2 text-3xl", dark ? "text-bg" : "text-ink")}>

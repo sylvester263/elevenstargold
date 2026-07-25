@@ -5,6 +5,7 @@ import { Section, SectionHeader } from "@/components/marketing/Section";
 import { CertSeal } from "@/components/marketing/CertSeal";
 import { buildMetadata } from "@/lib/seo/metadata";
 import { getCertifications } from "@/lib/supabase/queries";
+import { Reveal } from "@/components/marketing/Reveal";
 
 export const metadata: Metadata = buildMetadata({
   title: "Certifications",
@@ -32,39 +33,38 @@ export default async function CertificationsPage() {
         />
 
         <div className="mt-4 divide-y divide-line">
-          {certifications.map((cert) => (
-            <div
-              key={cert.abbr}
-              className="grid grid-cols-[160px_1fr_auto] items-start gap-8 py-10 max-[880px]:grid-cols-1"
-            >
-              <CertSeal abbr={cert.abbr} fullName={cert.fullName} />
+          {certifications.map((cert, i) => (
+            <Reveal key={cert.abbr} delay={Math.min(i * 40, 320)}>
+              <div className="grid grid-cols-[160px_1fr_auto] items-start gap-8 py-10 max-[880px]:grid-cols-1">
+                <CertSeal abbr={cert.abbr} fullName={cert.fullName} />
 
-              <div>
-                <h2 className="text-xl text-ink">{cert.fullName}</h2>
-                {cert.issuingBody ? (
-                  <p className="mt-1 text-sm text-muted">{cert.issuingBody}</p>
-                ) : null}
+                <div>
+                  <h2 className="text-xl text-ink">{cert.fullName}</h2>
+                  {cert.issuingBody ? (
+                    <p className="mt-1 text-sm text-muted">{cert.issuingBody}</p>
+                  ) : null}
+                </div>
+
+                {cert.scanUrl ? (
+                  <div className="relative aspect-[1240/1754] w-32 shrink-0 border border-line max-[880px]:w-full max-[880px]:max-w-32">
+                    <Image
+                      src={cert.scanUrl}
+                      alt={`${cert.fullName} scan`}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                ) : (
+                  <div
+                    className="flex aspect-[1240/1754] w-32 shrink-0 flex-col items-center justify-center gap-2 border border-line bg-[repeating-linear-gradient(135deg,var(--line)_0,var(--line)_1px,transparent_1px,transparent_10px)] p-2 text-center max-[880px]:w-full max-[880px]:max-w-32"
+                  >
+                    <span className="text-[10px] leading-tight text-muted">
+                      Certificate image pending
+                    </span>
+                  </div>
+                )}
               </div>
-
-              {cert.scanUrl ? (
-                <div className="relative aspect-[1240/1754] w-32 shrink-0 border border-line max-[880px]:w-full max-[880px]:max-w-32">
-                  <Image
-                    src={cert.scanUrl}
-                    alt={`${cert.fullName} scan`}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-              ) : (
-                <div
-                  className="flex aspect-[1240/1754] w-32 shrink-0 flex-col items-center justify-center gap-2 border border-line bg-[repeating-linear-gradient(135deg,var(--line)_0,var(--line)_1px,transparent_1px,transparent_10px)] p-2 text-center max-[880px]:w-full max-[880px]:max-w-32"
-                >
-                  <span className="text-[10px] leading-tight text-muted">
-                    Certificate image pending
-                  </span>
-                </div>
-              )}
-            </div>
+            </Reveal>
           ))}
         </div>
       </Section>

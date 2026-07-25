@@ -18,7 +18,7 @@ function SubmitButton() {
       type="submit"
       size="lg"
       disabled={pending}
-      className="bg-gold text-navy hover:bg-gold-bright"
+      className="bg-orange text-charcoal-deep hover:bg-orange-dark"
     >
       {pending ? "Sending…" : "Send Message"}
     </Button>
@@ -53,7 +53,7 @@ export function ContactForm({ serviceOptions }: { serviceOptions: string[] }) {
           name="projectType"
           required
           defaultValue=""
-          className="h-9 rounded-lg border border-line bg-transparent px-3 text-sm text-ink outline-none focus-visible:border-gold"
+          className="h-9 rounded-lg border border-line bg-transparent px-3 text-sm text-ink outline-none focus-visible:border-orange"
         >
           <option value="" disabled>
             Select a service

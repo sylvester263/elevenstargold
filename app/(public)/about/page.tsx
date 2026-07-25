@@ -11,6 +11,7 @@ import {
   missionVision,
   capacity,
 } from "@/content/site-copy";
+import { Reveal } from "@/components/marketing/Reveal";
 
 export const metadata: Metadata = buildMetadata({
   title: "About",
@@ -33,61 +34,69 @@ export default async function AboutPage() {
         <LedgerStrip items={settings.ledgerStats} variant="light" compact />
       </div>
 
-      <Section>
-        <SectionHeader eyebrow="Company" heading="About Eleven Star Gold" />
-        <div className="mt-8 max-w-3xl">
-          <p className="text-ink">{companyHistory}</p>
-        </div>
-      </Section>
+      <Reveal>
+        <Section>
+          <SectionHeader eyebrow="Company" heading="About Eleven Star Gold" />
+          <div className="mt-8 max-w-3xl">
+            <p className="text-ink">{companyHistory}</p>
+          </div>
+        </Section>
+      </Reveal>
 
-      <Section className="border-t border-line">
-        <SectionHeader eyebrow="From the owner" heading="Message from the MD" />
-        <div className="mt-8 max-w-3xl">
-          <p className="whitespace-pre-line text-ink">
-            {mdMessage.fullLetter}
-          </p>
-          <p className="mt-6 font-mono text-sm text-muted">
-            {company.md} — Managing Director / CEO
-          </p>
-        </div>
-      </Section>
+      <Reveal>
+        <Section className="border-t border-line">
+          <SectionHeader eyebrow="From the owner" heading="Message from the MD" />
+          <div className="mt-8 max-w-3xl">
+            <p className="whitespace-pre-line text-ink">
+              {mdMessage.fullLetter}
+            </p>
+            <p className="mt-6 font-mono text-sm text-muted">
+              {company.md} — Managing Director / CEO
+            </p>
+          </div>
+        </Section>
+      </Reveal>
 
-      <Section className="border-t border-line">
-        <div className="grid grid-cols-2 gap-10 max-[880px]:grid-cols-1">
-          <div>
-            <SectionHeader eyebrow="Purpose" heading="Mission" />
-            <div className="mt-6">
-              <p className="whitespace-pre-line text-ink">
-                {missionVision.mission}
-              </p>
+      <Reveal>
+        <Section className="border-t border-line">
+          <div className="grid grid-cols-2 gap-10 max-[880px]:grid-cols-1">
+            <div>
+              <SectionHeader eyebrow="Purpose" heading="Mission" />
+              <div className="mt-6">
+                <p className="whitespace-pre-line text-ink">
+                  {missionVision.mission}
+                </p>
+              </div>
+            </div>
+            <div>
+              <SectionHeader eyebrow="Purpose" heading="Vision" />
+              <div className="mt-6">
+                <p className="text-ink">{missionVision.vision}</p>
+              </div>
             </div>
           </div>
-          <div>
-            <SectionHeader eyebrow="Purpose" heading="Vision" />
-            <div className="mt-6">
-              <p className="text-ink">{missionVision.vision}</p>
+        </Section>
+      </Reveal>
+
+      <Reveal>
+        <Section className="border-t border-line">
+          <SectionHeader eyebrow="Capacity" heading="Our Capacity" />
+          <div className="mt-8 grid grid-cols-2 gap-10 max-[880px]:grid-cols-1">
+            <div>
+              <h3 className="text-sm font-medium text-orange uppercase tracking-[0.1em]">
+                Staff
+              </h3>
+              <p className="mt-3 max-w-xl text-ink">{capacity.staff}</p>
+            </div>
+            <div>
+              <h3 className="text-sm font-medium text-orange uppercase tracking-[0.1em]">
+                Machinery & Equipment
+              </h3>
+              <p className="mt-3 max-w-xl text-ink">{capacity.machinery}</p>
             </div>
           </div>
-        </div>
-      </Section>
-
-      <Section className="border-t border-line">
-        <SectionHeader eyebrow="Capacity" heading="Our Capacity" />
-        <div className="mt-8 grid grid-cols-2 gap-10 max-[880px]:grid-cols-1">
-          <div>
-            <h3 className="text-sm font-medium text-gold uppercase tracking-[0.1em]">
-              Staff
-            </h3>
-            <p className="mt-3 max-w-xl text-ink">{capacity.staff}</p>
-          </div>
-          <div>
-            <h3 className="text-sm font-medium text-gold uppercase tracking-[0.1em]">
-              Machinery & Equipment
-            </h3>
-            <p className="mt-3 max-w-xl text-ink">{capacity.machinery}</p>
-          </div>
-        </div>
-      </Section>
+        </Section>
+      </Reveal>
     </div>
   );
 }

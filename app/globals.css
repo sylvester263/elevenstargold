@@ -12,7 +12,12 @@
   --font-display: var(--font-display);
 
   /* Eleven Star Gold design tokens — see 01-design-system.md. Do not rename
-     or duplicate these with different values elsewhere. */
+     or duplicate these with different values elsewhere.
+     --navy/--navy-2/--gold/--gold-bright/--rust are the RETIRED public-site
+     palette — kept only because the admin panel (app/admin/**,
+     components/admin/**) still uses them and is explicitly out of scope
+     for the charcoal/orange retrofit. Never use these in new public-facing
+     UI; use the charcoal and orange tokens below instead. */
   --color-bg: var(--bg);
   --color-paper: var(--paper);
   --color-ink: var(--ink);
@@ -25,6 +30,15 @@
   --color-muted: var(--muted);
   --color-muted-light: var(--muted-light);
   --color-rust: var(--rust);
+
+  /* Current public-site palette — 01-design-system.md (charcoal/orange
+     revision). Use these for all new/updated public-facing UI. */
+  --color-charcoal: var(--charcoal);
+  --color-charcoal-dark: var(--charcoal-dark);
+  --color-charcoal-deep: var(--charcoal-deep);
+  --color-orange: var(--orange);
+  --color-orange-dark: var(--orange-dark);
+  --color-orange-tint: var(--orange-tint);
 
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -78,6 +92,14 @@
   --muted: #6B6E74;
   --muted-light: rgba(245, 243, 238, 0.62);
   --rust: #9C4430;
+
+  /* Charcoal/orange revision — sourced directly from the client logo. */
+  --charcoal: #545454;
+  --charcoal-dark: #3A3A3A;
+  --charcoal-deep: #1E1E1E;
+  --orange: #FF6600;
+  --orange-dark: #E05A00;
+  --orange-tint: #FFF1E6;
 
   /* shadcn semantic slots, mapped onto the tokens above rather than
      redefined — restyle components with the tokens directly, don't reach
@@ -135,4 +157,20 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* Scroll-reveal — 01-design-system.md motion section. Applied via the
+   useReveal hook (components/marketing/Reveal.tsx), which also checks
+   prefers-reduced-motion in JS and skips the hidden starting state
+   entirely for those users, rather than relying only on the transition-
+   duration override above (belt-and-suspenders against any flash of
+   invisible content). */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 500ms ease-out, transform 500ms ease-out;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }

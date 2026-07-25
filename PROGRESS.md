@@ -4,6 +4,99 @@ Running note of what's built and what's left, per the working conventions in
 `08-tech-stack-and-conventions.md`. Keep this updated; a new session should
 be able to resume from this file without re-reading the whole spec folder.
 
+## ✅ Charcoal/orange design-system retrofit (01-design-system.md v2)
+
+`01-design-system.md` was properly rewritten this time (unlike the earlier
+false alarm — see the 09-launch-fixes.md section below): charcoal (`#545454`)
++ orange (`#FF6600`) brand colors, Sora headings + Inter body, scroll-reveal/
+hover-lift+zoom/count-up motion, in the register of Maveric/Avendo-style
+contractor sites rather than the old "government ledger" look.
+
+**Scope boundary — the admin panel is untouched, on purpose.** Colors are
+shared CSS custom properties that the admin CRUD screens also consume
+(buttons, sidebar, focus rings via shadcn's semantic slots), and headings
+share one global `--font-display` variable. Rather than repoint the old
+token values, new tokens were added *alongside* the old ones:
+- `app/globals.css`: `--navy`/`--navy-2`/`--gold`/`--gold-bright`/`--rust`
+  and all shadcn semantic slots (`--primary`/`--secondary`/`--accent`/
+  `--ring`/`--sidebar-*`) are untouched — admin still uses these. New:
+  `--ink` (unchanged value), `--charcoal`/`--charcoal-dark`/
+  `--charcoal-deep`, `--orange`/`--orange-dark`/`--orange-tint`, all
+  registered in `@theme inline` as real Tailwind utilities
+  (`bg-charcoal-dark`, `text-orange`, etc).
+- Fonts: `app/layout.tsx` now loads **Sora** as the site-wide `--font-display`
+  default, but *also* keeps loading Zilla Slab under a new
+  `--font-display-admin` variable. `app/admin/layout.tsx` — the **only**
+  admin file touched — wraps `{children}` in a single div with
+  `style={{ "--font-display": "var(--font-display-admin)" }}`, pinning
+  admin headings back to Zilla Slab via CSS custom-property scoping.
+  Verified with a screenshot: admin login is pixel-identical to before
+  (navy bg, gold button, Zilla Slab heading).
+- Layout rhythm (1160px max-width, 96/56px section padding) was
+  deliberately **not** touched — the user's instructions scoped this to
+  colors/fonts/motion only, not layout dimensions (01's own "1200px/104px"
+  layout-rule numbers were left alone for that reason).
+
+**Colors** — swapped `bg-navy`→`bg-charcoal-dark`, `text-gold`→`text-orange`,
+`bg-gold`→`bg-orange`, `text-navy`→`text-charcoal-deep` (button text on
+orange — verified 5.68:1 contrast), `gold-bright`→`orange-dark` (hover/
+pressed), across all 9 `components/marketing/*` files and all 9
+`app/(public)/*` pages + `not-found.tsx`. The placeholder "ES" logo mark
+(there's no actual logo image file anywhere in the repo — just a CSS-drawn
+box) was recolored to orange along with everything else, since it's a
+stand-in, not client-supplied brand collateral to preserve as-is.
+
+**`CertSeal`** got a new `dark` prop: the spec's literal colors (abbr in
+`--charcoal`, name in `--muted`) assume a light surface, but the homepage
+places this component on its dark section, where `--charcoal` text measures
+~1.5:1 contrast (illegible). `dark` swaps in `text-orange`/`text-muted-light`
+for that context; `/certifications` (light bg) uses the spec's literal
+colors unchanged.
+
+**⚠ Flagging, not fixing — orange as small text has a real contrast gap.**
+Precisely computed (not eyeballed): `--orange` (#FF6600) as text measures
+**2.94:1** on light backgrounds (`--bg`/`--paper`) and **3.88:1** on
+`--charcoal-dark` — both below WCAG AA's 4.5:1 for normal-size text (though
+the charcoal-dark case clears the 3:1 "large text" threshold). This is a
+property of the color itself (a vivid mid-luminance hue has mediocre
+contrast against both very light and very dark backgrounds), not an
+implementation bug, and it affects every small eyebrow label / text link
+using `text-orange` (which is most of them, per spec: "everything that
+needs to draw the eye uses orange"). Buttons are fine (dark text on orange
+*background* measures 5.68:1). The old gold/navy system had a milder
+version of the same issue (gold-on-paper was ~2.34:1). Since `#FF6600` is
+locked as "exact value from logo," this needs either a client decision to
+accept the trade-off (common for locked brand colors) or a follow-up pass
+adding non-color affordances (underlines, icons) to small orange links —
+flagging rather than unilaterally changing the brand hex.
+
+**Motion** — `components/marketing/Reveal.tsx` (IntersectionObserver-based
+fade+slide-in, no animation library) and `CountUp.tsx` (rAF-based count-up
+for whole-number ledger stats) — both check `prefers-reduced-motion` in JS
+and skip the hidden/animated state entirely for those users, not just rely
+on the global CSS override. Wired into: homepage sections (all but the
+hero, which renders immediately), About/Safety/project-detail sections,
+staggered per-item on Services and Certifications lists. `ProjectCard`/
+`ServiceCard` get hover-lift (`-translate-y-1` + `shadow-xl`) and the
+placeholder image block zooms (`scale-[1.04]`, clipped by
+`overflow-hidden`) on card hover — ready for real photos later.
+
+**Verified, not assumed**: real CDP sessions (`Emulation.setEmulatedMedia`/
+`setDeviceMetricsOverride`, not just screenshots) confirmed — 0 elements
+stuck hidden under reduced motion; 6 elements correctly start hidden and
+progressively reveal on scroll under normal motion; a real mouse hover
+event shifts a project card's position (lift) and changes its box-shadow;
+admin login renders pixel-identical; final grep across the whole repo
+shows the only remaining `navy`/`gold` references are in `globals.css`
+(kept for admin) and `app/admin/**`/`components/admin/**` — zero leaked
+into public-facing files.
+
+**Not done**: the spec's "Hero & imagery direction" section (full-bleed
+photography, Ken-Burns zoom, gradient overlay) — that requires sourcing
+placeholder photography and restructuring the hero's layout, which goes
+beyond the requested color/font/motion retrofit into content/layout
+territory. Flagged, not built.
+
 ## ✅ 09-launch-fixes.md — all 15 items worked through
 
 Note first: `00-README.md`'s revision note claims `01-design-system.md` was

@@ -37,21 +37,21 @@ export default async function ContactPage() {
 
           <div className="flex flex-col gap-8">
             <div>
-              <p className="text-xs tracking-[0.14em] text-gold uppercase">
+              <p className="text-xs tracking-[0.14em] text-orange uppercase">
                 Office
               </p>
               <p className="mt-2 text-sm text-ink">{settings.officeAddress}</p>
             </div>
 
             <div>
-              <p className="text-xs tracking-[0.14em] text-gold uppercase">
+              <p className="text-xs tracking-[0.14em] text-orange uppercase">
                 Phone
               </p>
               {settings.phones.map((phone) => (
                 <a
                   key={phone}
                   href={`tel:${phone.replace(/\s+/g, "")}`}
-                  className="mt-1 block font-mono text-sm text-ink hover:text-gold"
+                  className="mt-1 block font-mono text-sm text-ink hover:text-orange"
                 >
                   {phone}
                 </a>
@@ -59,19 +59,19 @@ export default async function ContactPage() {
             </div>
 
             <div>
-              <p className="text-xs tracking-[0.14em] text-gold uppercase">
+              <p className="text-xs tracking-[0.14em] text-orange uppercase">
                 Email
               </p>
               <a
                 href={`mailto:${settings.email}`}
-                className="mt-1 block text-sm text-ink hover:text-gold"
+                className="mt-1 block text-sm text-ink hover:text-orange"
               >
                 {settings.email}
               </a>
             </div>
 
             <div>
-              <p className="text-xs tracking-[0.14em] text-gold uppercase">
+              <p className="text-xs tracking-[0.14em] text-orange uppercase">
                 WhatsApp
               </p>
               <a
@@ -81,7 +81,7 @@ export default async function ContactPage() {
                 )}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-1 block font-mono text-sm text-ink hover:text-gold"
+                className="mt-1 block font-mono text-sm text-ink hover:text-orange"
               >
                 {settings.whatsappNumber}
               </a>

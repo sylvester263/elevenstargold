@@ -56,8 +56,8 @@ export function ProjectGallery({
             className={cn(
               "border px-4 py-2 text-sm",
               active === cat
-                ? "border-gold bg-gold text-navy"
-                : "border-line text-muted hover:border-gold",
+                ? "border-orange bg-orange text-charcoal-deep"
+                : "border-line text-muted hover:border-orange",
             )}
           >
             {cat}
@@ -81,7 +81,7 @@ export function ProjectGallery({
         <div className="mt-10 text-center">
           <Link
             href="/projects"
-            className="text-sm font-medium text-gold hover:text-gold-bright"
+            className="text-sm font-medium text-orange hover:text-orange-dark"
           >
             View all projects →
           </Link>

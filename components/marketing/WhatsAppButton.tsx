@@ -2,8 +2,8 @@ import { getSiteSettings, whatsappHref } from "@/lib/settings";
 import { WhatsAppIcon } from "@/components/marketing/icons";
 
 // Floating action button, all pages, persistent across scroll. This is the
-// one place allowed to break from navy/gold — WhatsApp brand recognition
-// matters more here than palette purity — 03-header-and-footer.md.
+// one place allowed to break from charcoal/orange — WhatsApp brand
+// recognition matters more here than palette purity — 03-header-and-footer.md.
 export async function WhatsAppButton() {
   const settings = await getSiteSettings();
 

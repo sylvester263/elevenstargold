@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { CountUp } from "@/components/marketing/CountUp";
 
 export type LedgerItem = { value: string; label: string; tag?: string };
 
@@ -56,10 +57,10 @@ export function LedgerStrip({
                 : compact
                   ? "text-2xl"
                   : "text-4xl",
-              isDark ? "text-gold-bright" : "text-ink",
+              isDark ? "text-orange" : "text-ink",
             )}
           >
-            {item.value}
+            <CountUp value={item.value} />
           </p>
           <p
             className={cn(

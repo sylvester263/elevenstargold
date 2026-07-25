@@ -15,7 +15,7 @@ export default function NotFound() {
     <>
       <Header />
       <main className="flex flex-1 flex-col items-center justify-center bg-bg px-8 py-24 text-center max-[600px]:px-4 max-[600px]:py-14">
-        <p className="text-xs tracking-[0.14em] text-gold uppercase">
+        <p className="text-xs tracking-[0.14em] text-orange uppercase">
           404
         </p>
         <h1 className="mt-4 text-4xl text-ink">Page not found</h1>
@@ -26,7 +26,7 @@ export default function NotFound() {
         <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
           <Link
             href="/"
-            className={cn(buttonVariants({ size: "lg" }), "bg-gold text-navy hover:bg-gold-bright")}
+            className={cn(buttonVariants({ size: "lg" }), "bg-orange text-charcoal-deep hover:bg-orange-dark")}
           >
             Back to Homepage
           </Link>

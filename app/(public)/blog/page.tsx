@@ -36,7 +36,7 @@ export default async function BlogIndexPage() {
                 href={`/blog/${post.slug}`}
                 className="border border-line bg-paper p-6"
               >
-                <p className="text-xs tracking-[0.1em] text-gold uppercase">
+                <p className="text-xs tracking-[0.1em] text-orange uppercase">
                   {post.category}
                 </p>
                 <h2 className="mt-2 text-lg text-ink">{post.title}</h2>

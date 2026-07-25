@@ -21,17 +21,17 @@ const NAV_LINKS = [
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-50 border-b border-line-dark bg-navy">
+    <header className="sticky top-0 z-50 border-b border-line-dark bg-charcoal-dark">
       <div className="mx-auto flex max-w-[1160px] items-center justify-between px-8 py-4 max-[600px]:px-4">
         <Link href="/" className="flex items-center gap-3">
-          <span className="flex h-10 w-10 shrink-0 items-center justify-center border border-gold font-display text-sm font-semibold text-gold-bright">
+          <span className="flex h-10 w-10 shrink-0 items-center justify-center border border-orange font-display text-sm font-semibold text-orange">
             ES
           </span>
           <span className="flex flex-col leading-tight">
             <span className="font-display text-base font-semibold text-bg">
               Eleven Star Gold
             </span>
-            <span className="text-[10px] uppercase tracking-[0.14em] text-gold">
+            <span className="text-[10px] uppercase tracking-[0.14em] text-orange">
               Engineering &amp; Construction
             </span>
           </span>
@@ -54,7 +54,7 @@ export function Header() {
             href="/contact"
             className={cn(
               buttonVariants({ size: "lg" }),
-              "bg-gold text-navy hover:bg-gold-bright",
+              "bg-orange text-charcoal-deep hover:bg-orange-dark",
             )}
           >
             Request a Quote
@@ -63,13 +63,13 @@ export function Header() {
           <Sheet>
             <SheetTrigger
               aria-label="Open menu"
-              className="flex size-9 items-center justify-center text-bg transition-colors hover:text-gold-bright min-[880px]:hidden"
+              className="flex size-9 items-center justify-center text-bg transition-colors hover:text-orange min-[880px]:hidden"
             >
               <Menu className="size-5" />
             </SheetTrigger>
             <SheetContent
               side="right"
-              className="border-line-dark bg-navy text-bg"
+              className="border-line-dark bg-charcoal-dark text-bg"
             >
               <SheetTitle className="sr-only">Menu</SheetTitle>
               <nav className="mt-16 flex flex-col gap-6 px-6">

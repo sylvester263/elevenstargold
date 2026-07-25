@@ -9,6 +9,7 @@ import { buildMetadata } from "@/lib/seo/metadata";
 import { serviceForCategory } from "@/lib/service-category";
 import { slugify } from "@/lib/slug";
 import { getPublishedProjects, getProjectBySlug } from "@/lib/supabase/queries";
+import { Reveal } from "@/components/marketing/Reveal";
 
 export async function generateStaticParams() {
   const projects = await getPublishedProjects();
@@ -62,7 +63,7 @@ export default async function ProjectDetailPage({
       </div>
 
       <Section className="pb-0!">
-        <p className="text-xs tracking-[0.14em] text-gold uppercase">
+        <p className="text-xs tracking-[0.14em] text-orange uppercase">
           {project.category}
         </p>
         <h1 className="mt-2 max-w-3xl text-4xl text-ink">{project.title}</h1>
@@ -111,14 +112,14 @@ export default async function ProjectDetailPage({
         <div className="mt-8 flex flex-wrap gap-4 text-sm">
           <Link
             href={`/projects?category=${project.category.toLowerCase()}`}
-            className="font-medium text-gold hover:text-gold-bright"
+            className="font-medium text-orange hover:text-orange-dark"
           >
             More {project.category} projects →
           </Link>
           {relatedService ? (
             <Link
               href={`/services#${slugify(relatedService)}`}
-              className="font-medium text-gold hover:text-gold-bright"
+              className="font-medium text-orange hover:text-orange-dark"
             >
               See the {relatedService} service →
             </Link>
@@ -127,14 +128,16 @@ export default async function ProjectDetailPage({
       </Section>
 
       {related.length > 0 ? (
-        <Section className="border-t border-line">
-          <h2 className="text-2xl text-ink">Related projects</h2>
-          <div className="mt-8 grid grid-cols-3 gap-6 max-[880px]:grid-cols-2 max-[600px]:grid-cols-1">
-            {related.map((p) => (
-              <ProjectCard key={p.slug} {...p} />
-            ))}
-          </div>
-        </Section>
+        <Reveal>
+          <Section className="border-t border-line">
+            <h2 className="text-2xl text-ink">Related projects</h2>
+            <div className="mt-8 grid grid-cols-3 gap-6 max-[880px]:grid-cols-2 max-[600px]:grid-cols-1">
+              {related.map((p) => (
+                <ProjectCard key={p.slug} {...p} />
+              ))}
+            </div>
+          </Section>
+        </Reveal>
       ) : null}
     </div>
   );

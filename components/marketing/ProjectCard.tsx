@@ -2,6 +2,8 @@ import Link from "next/link";
 
 // TODO: swap the placeholder block below for next/image once a real photo
 // exists for this project (with descriptive alt text) — 07-real-content-and-assets.md.
+// overflow-hidden on the image wrapper clips the group-hover zoom, per
+// 01-design-system.md's card-hover motion spec.
 export function ProjectCard({
   slug,
   title,
@@ -20,14 +22,16 @@ export function ProjectCard({
   return (
     <Link
       href={`/projects/${slug}`}
-      className="group flex flex-col border border-line bg-paper transition-transform duration-150 ease-out hover:-translate-y-[3px] hover:shadow-md motion-reduce:transition-none motion-reduce:hover:translate-y-0"
+      className="group flex flex-col border border-line bg-paper transition-[transform,box-shadow] duration-200 ease-out hover:-translate-y-1 hover:shadow-xl motion-reduce:transition-none motion-reduce:hover:translate-y-0"
     >
-      <div
-        className="aspect-[3/2] w-full bg-[repeating-linear-gradient(135deg,var(--line)_0,var(--line)_1px,transparent_1px,transparent_12px)] bg-navy/5"
-        aria-hidden="true"
-      />
+      <div className="aspect-[3/2] w-full overflow-hidden">
+        <div
+          className="h-full w-full bg-[repeating-linear-gradient(135deg,var(--line)_0,var(--line)_1px,transparent_1px,transparent_12px)] bg-charcoal/5 transition-transform duration-300 ease-out group-hover:scale-[1.04] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+          aria-hidden="true"
+        />
+      </div>
       <div className="flex flex-col gap-2 p-5">
-        <span className="text-xs tracking-[0.1em] text-gold uppercase">
+        <span className="text-xs tracking-[0.1em] text-orange uppercase">
           {category}
         </span>
         <h3 className="font-display text-base text-ink">{title}</h3>

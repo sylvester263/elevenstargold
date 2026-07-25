@@ -3,6 +3,7 @@ import { Breadcrumbs } from "@/components/marketing/Breadcrumbs";
 import { Section, SectionHeader } from "@/components/marketing/Section";
 import { buildMetadata } from "@/lib/seo/metadata";
 import { hsePolicy, ppe } from "@/content/site-copy";
+import { Reveal } from "@/components/marketing/Reveal";
 
 export const metadata: Metadata = buildMetadata({
   title: "Safety",
@@ -19,9 +20,9 @@ export default function SafetyPage() {
         </div>
       </div>
 
-      <section className="bg-navy">
+      <section className="bg-charcoal-dark">
         <Section className="pt-16!">
-          <p className="text-xs tracking-[0.14em] text-gold uppercase">
+          <p className="text-xs tracking-[0.14em] text-orange uppercase">
             HSE Policy
           </p>
           <h1 className="mt-2 max-w-2xl text-4xl text-bg">
@@ -35,7 +36,7 @@ export default function SafetyPage() {
                   key={stat}
                   className="border border-line-dark p-6 text-center"
                 >
-                  <p className="font-mono text-4xl text-gold-bright">0</p>
+                  <p className="font-mono text-4xl text-orange">0</p>
                   <p className="mt-2 text-sm text-muted-light">{stat}</p>
                 </div>
               ),
@@ -44,26 +45,30 @@ export default function SafetyPage() {
         </Section>
       </section>
 
-      <Section>
-        <SectionHeader eyebrow="Policy" heading="Full HSE Policy" />
-        <div className="mt-8 max-w-3xl">
-          <p className="whitespace-pre-line text-ink">{hsePolicy.fullText}</p>
-        </div>
-      </Section>
+      <Reveal>
+        <Section>
+          <SectionHeader eyebrow="Policy" heading="Full HSE Policy" />
+          <div className="mt-8 max-w-3xl">
+            <p className="whitespace-pre-line text-ink">{hsePolicy.fullText}</p>
+          </div>
+        </Section>
+      </Reveal>
 
-      <Section className="border-t border-line">
-        <SectionHeader eyebrow="On site" heading="Safety Equipment & PPE" />
-        <ul className="mt-8 grid max-w-3xl grid-cols-3 gap-4 max-[600px]:grid-cols-1">
-          {ppe.map((item) => (
-            <li
-              key={item}
-              className="border border-line bg-paper px-4 py-3 text-sm text-ink"
-            >
-              {item}
-            </li>
-          ))}
-        </ul>
-      </Section>
+      <Reveal>
+        <Section className="border-t border-line">
+          <SectionHeader eyebrow="On site" heading="Safety Equipment & PPE" />
+          <ul className="mt-8 grid max-w-3xl grid-cols-3 gap-4 max-[600px]:grid-cols-1">
+            {ppe.map((item) => (
+              <li
+                key={item}
+                className="border border-line bg-paper px-4 py-3 text-sm text-ink"
+              >
+                {item}
+              </li>
+            ))}
+          </ul>
+        </Section>
+      </Reveal>
     </div>
   );
 }

@@ -22,7 +22,7 @@ export async function Footer() {
   const recentPosts = await getRecentPosts(3);
 
   return (
-    <footer className="border-t border-line-dark bg-navy text-muted-light">
+    <footer className="border-t border-line-dark bg-charcoal-dark text-muted-light">
       <div className="mx-auto max-w-[1160px] px-8 py-16 max-[600px]:px-4 max-[600px]:py-10">
         <div className="grid grid-cols-4 gap-10 max-[880px]:grid-cols-2 max-[600px]:grid-cols-1">
           <div>
@@ -34,7 +34,7 @@ export async function Footer() {
           </div>
 
           <div>
-            <p className="text-xs uppercase tracking-[0.14em] text-gold">
+            <p className="text-xs uppercase tracking-[0.14em] text-orange">
               Contact
             </p>
             <ul className="mt-3 flex flex-col gap-2 text-sm">
@@ -70,7 +70,7 @@ export async function Footer() {
           </div>
 
           <div>
-            <p className="text-xs uppercase tracking-[0.14em] text-gold">
+            <p className="text-xs uppercase tracking-[0.14em] text-orange">
               Company
             </p>
             <ul className="mt-3 flex flex-col gap-2 text-sm">
@@ -98,7 +98,7 @@ export async function Footer() {
           </div>
 
           <div>
-            <p className="text-xs uppercase tracking-[0.14em] text-gold">
+            <p className="text-xs uppercase tracking-[0.14em] text-orange">
               Work
             </p>
             <ul className="mt-3 flex flex-col gap-2 text-sm">
