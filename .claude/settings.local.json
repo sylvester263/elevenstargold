@@ -101,7 +101,12 @@
       "Bash('/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe' --headless --disable-gpu '--screenshot=C:\\\\Users\\\\hp\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\D--elevenstar\\\\7a198b4f-3124-4f0f-b33e-79182693b904\\\\scratchpad\\\\trustbar-full.png' --window-size=1280,900 http://localhost:3000/)",
       "Bash('/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe' --headless --disable-gpu '--screenshot=C:\\\\Users\\\\hp\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\D--elevenstar\\\\7a198b4f-3124-4f0f-b33e-79182693b904\\\\scratchpad\\\\trustbar-allsourced.png' --window-size=1280,900 http://localhost:3000/)",
       "Bash(\"/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe\" --headless --disable-gpu --remote-debugging-port=9337 --window-size=1280,900 \"http://localhost:3000/\")",
-      "Bash(powershell -Command \"Stop-Process -Id 3564 -Force -ErrorAction SilentlyContinue\")"
+      "Bash(powershell -Command \"Stop-Process -Id 3564 -Force -ErrorAction SilentlyContinue\")",
+      "WebFetch(domain:www.pec.org.pk)",
+      "Bash('/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe' --headless --disable-gpu '--screenshot=C:\\\\Users\\\\hp\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\D--elevenstar\\\\7a198b4f-3124-4f0f-b33e-79182693b904\\\\scratchpad\\\\certseal-home.png' --window-size=1280,2000 http://localhost:3000/)",
+      "Bash('/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe' --headless --disable-gpu '--screenshot=C:\\\\Users\\\\hp\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\D--elevenstar\\\\7a198b4f-3124-4f0f-b33e-79182693b904\\\\scratchpad\\\\certseal-home2.png' --window-size=1280,2400 http://localhost:3000/)",
+      "Bash('/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe' --headless --disable-gpu '--screenshot=C:\\\\Users\\\\hp\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\D--elevenstar\\\\7a198b4f-3124-4f0f-b33e-79182693b904\\\\scratchpad\\\\allcerts-page.png' --window-size=1280,1700 http://localhost:3000/certifications)",
+      "Bash('/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe' --headless --disable-gpu '--screenshot=C:\\\\Users\\\\hp\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\D--elevenstar\\\\7a198b4f-3124-4f0f-b33e-79182693b904\\\\scratchpad\\\\allcerts-home.png' --window-size=1280,2400 http://localhost:3000/)"
     ]
   },
   "enableAllProjectMcpServers": true,

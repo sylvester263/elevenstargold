@@ -4,6 +4,40 @@ Running note of what's built and what's left, per the working conventions in
 `08-tech-stack-and-conventions.md`. Keep this updated; a new session should
 be able to resume from this file without re-reading the whole spec folder.
 
+## ✅ Certification seal logos — all 5 sourced
+
+`components/marketing/CertSeal.tsx` now shows real issuing-authority logos
+for all 5 certifications, via an internal `CERT_LOGOS` lookup keyed by
+`abbr` (same pattern as `TrustBar.tsx`'s `TRUST_LOGOS`) — no DB/schema
+change, so admin's certifications CRUD is untouched. Logo sits inside the
+existing dashed-ring seal exactly as before, sized to fit without
+stretching/cropping (`object-contain`), with a `bg-paper` backing disc for
+logos whose source file isn't transparent (most of them) so they read
+cleanly on both the light and dark seal variants. Verified on both the
+homepage (dark) and `/certifications` (light) — the page's actual
+certificate-scan placeholders ("Certificate image pending") were **not
+touched**, those stay pending real scans from the client, per instruction.
+
+**Used (saved to `public/images/certs/`):**
+- **PEC, PRA, TAX** — supplied directly by the user/client. PEC has real
+  transparency; PRA and TAX are flat/opaque (get the `bg-paper` backing).
+  Note: PRA's source file has a thin decorative border frame and generous
+  white padding around a small centered logo — it renders correctly but
+  visually smaller/more cramped than the other 4 seals. Left as supplied
+  rather than cropped, since the brief explicitly said not to crop; if the
+  client wants it more prominent, a tighter-cropped version would need to
+  come from them.
+- **FBR** (`fbr.png`) — Federal Board of Revenue. Pulled directly from
+  `download1.fbr.gov.pk` (their own official CDN), a genuine primary
+  source, reachable and confirmed. Real alpha transparency.
+- **COC** (`coc.png`) — resolved to **The Lahore Chamber of Commerce &
+  Industry**, confirmed directly with the user (not Sheikhupura, as
+  originally guessed — the client corrected this). Pulled directly from
+  `lcci.com.pk`'s own homepage, a genuine primary source, reachable and
+  confirmed.
+
+No fallback text remaining for any of the 5 — all real, sourced marks.
+
 ## ⚠ Trust bar logos — all 8 sourced, needs client sign-off before launch
 
 Homepage "Trusted by" strip (`components/marketing/TrustBar.tsx`) now shows
