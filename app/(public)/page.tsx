@@ -13,6 +13,7 @@ import { SERVICE_CATEGORY } from "@/lib/service-category";
 import { mdMessage, services } from "@/content/site-copy";
 import { buildMetadata } from "@/lib/seo/metadata";
 import { Reveal } from "@/components/marketing/Reveal";
+import { TrustBar } from "@/components/marketing/TrustBar";
 
 export const metadata: Metadata = buildMetadata({
   title: "Engineering Services",
@@ -96,16 +97,10 @@ export default async function Home() {
       {/* 3. Trust bar */}
       <Reveal>
         <Section className="bg-paper py-14!" as="div">
-          <p className="text-xs tracking-[0.14em] text-muted uppercase">
+          <p className="text-center text-xs tracking-[0.14em] text-muted uppercase">
             Trusted by
           </p>
-          <div className="mt-6 flex flex-wrap gap-x-10 gap-y-4">
-            {settings.trustBarClients.map((name) => (
-              <span key={name} className="font-display text-lg text-ink/70">
-                {name}
-              </span>
-            ))}
-          </div>
+          <TrustBar clients={settings.trustBarClients} />
         </Section>
       </Reveal>
 

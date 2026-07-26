@@ -4,6 +4,52 @@ Running note of what's built and what's left, per the working conventions in
 `08-tech-stack-and-conventions.md`. Keep this updated; a new session should
 be able to resume from this file without re-reading the whole spec folder.
 
+## ⚠ Trust bar logos — all 8 sourced, needs client sign-off before launch
+
+Homepage "Trusted by" strip (`components/marketing/TrustBar.tsx`) now shows
+real logos for all 8 names, centered, full color, capped to a consistent
+height (not width) so a square crest and a wide wordmark read as the same
+visual weight, wrapping 2–4 per row on mobile — verified at desktop and
+375px. **These are real official assets from real organizations — do not
+treat this as done until the client has confirmed each one.**
+
+**Used (saved to `public/images/trust/`):**
+- **PESSI, PWWF, HISDU, PHE** — supplied directly by the user/client.
+  HISDU supersedes an earlier finding in this file that it had no distinct
+  logo of its own (that was based on their official government page using
+  a shared department mark) — this client-supplied file is a real,
+  distinct HISDU seal, use this one.
+- **TMA** — "TMA" in the client's trust-bar list actually refers to
+  **Metropolitan Corporation Lahore** (Lahore is governed by MCL, not a
+  Tehsil Municipal Administration) — confirmed directly with the user
+  before wiring it in. Source file (`tma.jpg`) has a solid dark-green
+  background baked in (unlike every other file here, which are white/
+  near-white) — clipped to a circle via `rounded-full` in the component so
+  it blends with the section background the same way the others do. This
+  is a CSS presentation choice only; the source file itself is untouched.
+- **FCCU** (`fccu.png`) — Forman Christian College's official crest.
+  Their own domain (`fccollege.edu.pk`) returned HTTP 403 to every fetch
+  attempt from this environment (bot-protection, not confirmation the site
+  is down) — sourced instead from the logo file in Wikipedia's infobox for
+  Forman Christian College, which Wikipedia's non-free-logo policy requires
+  to be the subject's actual current official mark. This is a step removed
+  from the primary source — flag this one specifically for a quick visual
+  check against their letterhead/current website before sign-off.
+- **PHFMC** (`phfmc.png`) — Punjab Health Facilities Management Company.
+  Pulled directly from `phfmc.org`'s own homepage (`fetchpriority="high"`
+  hero logo), a genuine primary source, reachable and confirmed.
+- **HUBCO** (`hubco.png`) — The Hub Power Company Limited. Pulled directly
+  from `hubpower.com`'s own homepage, a genuine primary source, reachable
+  and confirmed. Note the source file is only 201×50px — fine at the
+  current `h-12` display size, but would look soft if the trust bar is
+  ever made significantly larger; a higher-res version may be worth
+  requesting from the client later.
+
+Only FCCU (Wikipedia-sourced, not their own domain) and TMA/MCL (client
+confirmed a different entity than the literal "TMA" label implies) need a
+second look before launch — everything else came straight from either the
+organization's own domain or the client directly.
+
 ## ✅ Real logo wired in; header switched to a light background
 
 The client's actual logo file (building icon + "ESG Engineering Services /
