@@ -16,6 +16,7 @@ import { mdMessage, services } from "@/content/site-copy";
 import { buildMetadata } from "@/lib/seo/metadata";
 import { Reveal } from "@/components/marketing/Reveal";
 import { TrustBar } from "@/components/marketing/TrustBar";
+import { HeroBackground } from "@/components/marketing/HeroBackground";
 
 export const metadata: Metadata = buildMetadata({
   title: "Engineering Services",
@@ -35,14 +36,7 @@ export default async function Home() {
     <main className="flex-1">
       {/* 1. Hero */}
       <section className="relative overflow-hidden bg-charcoal-dark">
-        <div
-          className="pointer-events-none absolute inset-0 opacity-[0.05]"
-          style={{
-            backgroundImage:
-              "repeating-linear-gradient(135deg, var(--orange) 0, var(--orange) 1px, transparent 1px, transparent 28px)",
-          }}
-          aria-hidden="true"
-        />
+        <HeroBackground />
         <Section className="relative">
           <div className="grid grid-cols-2 items-center gap-16 max-[880px]:grid-cols-1">
             <div>
