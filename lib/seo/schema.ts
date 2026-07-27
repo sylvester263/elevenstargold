@@ -6,11 +6,18 @@ export function generalContractorSchema({
   address,
   phone,
   url,
+  logo,
 }: {
   name: string;
   address: string;
   phone: string;
   url: string;
+  // Google's logo requirement (developers.google.com/search/docs/appearance/
+  // structured-data/logo): GeneralContractor extends LocalBusiness extends
+  // Organization, so `logo` here satisfies it directly — min 112x112px, on
+  // a distinct (non-transparent) background, absolute URL. Points at the
+  // same opaque android-chrome-512x512.png used for the manifest/app icons.
+  logo?: string;
 }) {
   return {
     "@context": "https://schema.org",
@@ -19,6 +26,7 @@ export function generalContractorSchema({
     address,
     telephone: phone,
     url,
+    ...(logo ? { logo } : {}),
   };
 }
 

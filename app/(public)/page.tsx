@@ -13,7 +13,8 @@ import { getPublishedProjects, getCertifications } from "@/lib/supabase/queries"
 import { SERVICE_CATEGORY } from "@/lib/service-category";
 import { SERVICE_ICON } from "@/lib/service-icons";
 import { mdMessage, services } from "@/content/site-copy";
-import { buildMetadata } from "@/lib/seo/metadata";
+import { buildMetadata, SITE_NAME, SITE_URL } from "@/lib/seo/metadata";
+import { generalContractorSchema } from "@/lib/seo/schema";
 import { Reveal } from "@/components/marketing/Reveal";
 import { TrustBar } from "@/components/marketing/TrustBar";
 import { HeroBackground } from "@/components/marketing/HeroBackground";
@@ -32,8 +33,25 @@ export default async function Home() {
     getCertifications(),
   ]);
 
+  // Organization/logo structured data — developers.google.com/search/docs/
+  // appearance/structured-data/logo. Homepage only, per Google's own
+  // guidance to mark this up once, not per-page.
+  const orgSchema = generalContractorSchema({
+    name: SITE_NAME,
+    address: settings.officeAddress,
+    phone: settings.phones[0] ?? "",
+    url: SITE_URL,
+    logo: `${SITE_URL}/android-chrome-512x512.png`,
+  });
+
   return (
     <main className="flex-1">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(orgSchema).replace(/</g, "\\u003c"),
+        }}
+      />
       {/* 1. Hero */}
       <section className="relative overflow-hidden bg-charcoal-dark">
         <HeroBackground />
