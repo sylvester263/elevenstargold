@@ -4,6 +4,7 @@ import { Breadcrumbs } from "@/components/marketing/Breadcrumbs";
 import { Section, SectionHeader } from "@/components/marketing/Section";
 import { buildMetadata } from "@/lib/seo/metadata";
 import { SERVICE_CATEGORY } from "@/lib/service-category";
+import { SERVICE_ICON } from "@/lib/service-icons";
 import { slugify } from "@/lib/slug";
 import { services, servicesIntro, servicesClosing } from "@/content/site-copy";
 import { Reveal } from "@/components/marketing/Reveal";
@@ -32,33 +33,36 @@ export default function ServicesPage() {
         />
         <p className="mt-8 max-w-2xl text-ink">{servicesIntro}</p>
 
-        <div className="mt-4 divide-y divide-line">
+        <div className="mt-10 grid grid-cols-3 gap-6 max-[880px]:grid-cols-2 max-[600px]:grid-cols-1">
           {services.map((service, i) => {
             const category = SERVICE_CATEGORY[service.name];
             const id = slugify(service.name);
+            const Icon = SERVICE_ICON[service.name];
 
             return (
-              <Reveal key={service.name} delay={Math.min(i * 40, 320)}>
-                <div id={id} className="scroll-mt-24 py-10">
-                  <div className="grid grid-cols-[80px_1fr] gap-8 max-[600px]:grid-cols-1 max-[600px]:gap-3">
-                    <span className="font-mono text-2xl text-orange">
-                      {String(i + 1).padStart(2, "0")}
+              <Reveal key={service.name} delay={Math.min(i * 60, 360)}>
+                <div
+                  id={id}
+                  className="scroll-mt-24 flex h-full flex-col gap-3 border border-line bg-paper p-6 transition-[transform,box-shadow] duration-200 ease-out hover:-translate-y-1 hover:shadow-xl motion-reduce:transition-none motion-reduce:hover:translate-y-0"
+                >
+                  {Icon ? (
+                    <span className="flex size-11 items-center justify-center border border-orange/30 bg-orange/10 text-orange">
+                      <Icon className="size-5" strokeWidth={1.75} aria-hidden="true" />
                     </span>
-                    <div>
-                      <h2 className="text-2xl text-ink">{service.name}</h2>
-                      <p className="mt-3 max-w-2xl text-muted">
-                        {service.description}
-                      </p>
-                      {category ? (
-                        <Link
-                          href={`/projects?category=${category.toLowerCase()}`}
-                          className="mt-4 inline-block text-sm font-medium text-orange hover:text-orange-dark"
-                        >
-                          See {category} projects delivered →
-                        </Link>
-                      ) : null}
-                    </div>
-                  </div>
+                  ) : null}
+                  <span className="font-mono text-sm text-orange">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <h2 className="font-display text-lg text-ink">{service.name}</h2>
+                  <p className="text-sm text-muted">{service.description}</p>
+                  {category ? (
+                    <Link
+                      href={`/projects?category=${category.toLowerCase()}`}
+                      className="mt-auto pt-2 text-sm font-medium text-orange hover:text-orange-dark"
+                    >
+                      See {category} projects delivered →
+                    </Link>
+                  ) : null}
                 </div>
               </Reveal>
             );

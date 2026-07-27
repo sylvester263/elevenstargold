@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ProjectCard } from "@/components/marketing/ProjectCard";
+import { Reveal } from "@/components/marketing/Reveal";
 import type { Project, ProjectCategory } from "@/lib/supabase/queries";
 import { cn } from "@/lib/utils";
 
@@ -66,8 +67,10 @@ export function ProjectGallery({
       </div>
 
       <div className="mt-8 grid grid-cols-3 gap-6 max-[880px]:grid-cols-2 max-[600px]:grid-cols-1">
-        {visible.map((project) => (
-          <ProjectCard key={project.slug} {...project} />
+        {visible.map((project, i) => (
+          <Reveal key={project.slug} delay={Math.min(i * 50, 300)}>
+            <ProjectCard {...project} />
+          </Reveal>
         ))}
       </div>
 

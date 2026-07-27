@@ -33,6 +33,8 @@ export type ProjectCategory =
   | "Industrial"
   | "Housing";
 
+export type ProjectImage = { url: string; alt: string; sortOrder: number };
+
 export type Project = {
   slug: string;
   title: string;
@@ -40,9 +42,12 @@ export type Project = {
   cost: string;
   year: string;
   category: ProjectCategory;
+  // First image in the array is the card/hero cover — set by admin gallery
+  // order (the ↑/↓ reorder controls in ProjectForm), no separate is_cover
+  // flag. Matches the convention /projects/[slug] already used for its hero
+  // image before this card-thumbnail fix existed.
+  images: ProjectImage[];
 };
-
-export type ProjectImage = { url: string; alt: string; sortOrder: number };
 
 export type ProjectDetail = Project & {
   writeUp: string | null;
@@ -55,7 +60,7 @@ export async function getPublishedProjects(): Promise<Project[]> {
   const supabase = createClient();
   const { data, error } = await supabase
     .from("projects")
-    .select("slug, title, client, cost, year, category")
+    .select("slug, title, client, cost, year, category, images")
     .eq("published", true)
     .order("created_at", { ascending: true });
 
@@ -63,7 +68,7 @@ export async function getPublishedProjects(): Promise<Project[]> {
     console.error("getPublishedProjects: Supabase query failed", error);
   }
 
-  return data ?? [];
+  return (data ?? []).map((p) => ({ ...p, images: p.images ?? [] }));
 }
 
 export async function getProjectBySlug(
@@ -122,6 +127,59 @@ export async function getLedgerComputedStats(): Promise<{
     contractsDelivered: projects.length,
     largestContract: max > 0 ? `₨${max.toLocaleString("en-US")}` : "—",
   };
+}
+
+export type GalleryImage = {
+  url: string;
+  alt: string;
+  projectSlug: string;
+  projectTitle: string;
+};
+
+// Reuses getPublishedProjects() rather than a separate query — /gallery has
+// no content of its own, it's every published project's images flattened
+// into one grid (02-sitemap-and-routes.md's "no separate content entry"
+// principle, applied to a new route instead of a new table).
+export async function getGalleryImages(): Promise<GalleryImage[]> {
+  const projects = await getPublishedProjects();
+
+  return projects.flatMap((p) =>
+    p.images.map((img) => ({
+      url: img.url,
+      alt: img.alt || p.title,
+      projectSlug: p.slug,
+      projectTitle: p.title,
+    })),
+  );
+}
+
+export type TeamMember = {
+  name: string;
+  role: string;
+  bio: string | null;
+  photoUrl: string | null;
+};
+
+export async function getTeamMembers(): Promise<TeamMember[]> {
+  if (!isSupabaseConfigured()) return [];
+
+  const supabase = createClient();
+  const { data, error } = await supabase
+    .from("team_members")
+    .select("name, role, bio, photo_url")
+    .eq("published", true)
+    .order("sort_order", { ascending: true });
+
+  if (error) {
+    console.error("getTeamMembers: Supabase query failed", error);
+  }
+
+  return (data ?? []).map((m) => ({
+    name: m.name,
+    role: m.role,
+    bio: m.bio,
+    photoUrl: m.photo_url,
+  }));
 }
 
 export type Certification = {

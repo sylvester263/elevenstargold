@@ -200,6 +200,42 @@ create policy "inquiries_admin_delete"
   using (true);
 
 -- ============================================================
+-- team_members
+-- ============================================================
+create table if not exists public.team_members (
+  id uuid primary key default gen_random_uuid(),
+  name text not null,
+  role text not null,
+  bio text,
+  photo_url text,
+  sort_order integer not null default 0,
+  published boolean not null default false,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
+alter table public.team_members enable row level security;
+
+drop policy if exists "team_members_public_read_published" on public.team_members;
+create policy "team_members_public_read_published"
+  on public.team_members for select
+  to anon, authenticated
+  using (published = true);
+
+drop policy if exists "team_members_admin_read_all" on public.team_members;
+create policy "team_members_admin_read_all"
+  on public.team_members for select
+  to authenticated
+  using (true);
+
+drop policy if exists "team_members_admin_write" on public.team_members;
+create policy "team_members_admin_write"
+  on public.team_members for all
+  to authenticated
+  using (true)
+  with check (true);
+
+-- ============================================================
 -- updated_at triggers
 -- ============================================================
 create or replace function public.set_updated_at()
@@ -228,6 +264,10 @@ drop trigger if exists set_updated_at on public.site_settings;
 create trigger set_updated_at before update on public.site_settings
   for each row execute function public.set_updated_at();
 
+drop trigger if exists set_updated_at on public.team_members;
+create trigger set_updated_at before update on public.team_members
+  for each row execute function public.set_updated_at();
+
 -- ============================================================
 -- Storage buckets — public read, authenticated write
 -- ============================================================
@@ -235,29 +275,30 @@ insert into storage.buckets (id, name, public)
 values
   ('project-images', 'project-images', true),
   ('certification-scans', 'certification-scans', true),
-  ('blog-media', 'blog-media', true)
+  ('blog-media', 'blog-media', true),
+  ('team-photos', 'team-photos', true)
 on conflict (id) do nothing;
 
 drop policy if exists "storage_public_read" on storage.objects;
 create policy "storage_public_read"
   on storage.objects for select
   to anon, authenticated
-  using (bucket_id in ('project-images', 'certification-scans', 'blog-media'));
+  using (bucket_id in ('project-images', 'certification-scans', 'blog-media', 'team-photos'));
 
 drop policy if exists "storage_admin_write" on storage.objects;
 create policy "storage_admin_write"
   on storage.objects for insert
   to authenticated
-  with check (bucket_id in ('project-images', 'certification-scans', 'blog-media'));
+  with check (bucket_id in ('project-images', 'certification-scans', 'blog-media', 'team-photos'));
 
 drop policy if exists "storage_admin_update" on storage.objects;
 create policy "storage_admin_update"
   on storage.objects for update
   to authenticated
-  using (bucket_id in ('project-images', 'certification-scans', 'blog-media'));
+  using (bucket_id in ('project-images', 'certification-scans', 'blog-media', 'team-photos'));
 
 drop policy if exists "storage_admin_delete" on storage.objects;
 create policy "storage_admin_delete"
   on storage.objects for delete
   to authenticated
-  using (bucket_id in ('project-images', 'certification-scans', 'blog-media'));
+  using (bucket_id in ('project-images', 'certification-scans', 'blog-media', 'team-photos'));

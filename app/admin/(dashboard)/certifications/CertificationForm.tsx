@@ -98,10 +98,15 @@ export function CertificationForm({ cert }: { cert?: CertificationRow }) {
         <input
           id="scan"
           type="file"
-          accept="image/*,application/pdf"
+          accept="image/*"
           onChange={handleScanUpload}
           className="text-sm"
         />
+        <p className="text-xs text-muted">
+          Image only (JPG/PNG) — the public page renders this through
+          next/image, which can&rsquo;t display a PDF. If you only have a PDF
+          scan, export/screenshot it as an image first.
+        </p>
         {uploading ? <p className="text-xs text-muted">Uploading…</p> : null}
         {scanUrl ? (
           // eslint-disable-next-line @next/next/no-img-element

@@ -85,6 +85,11 @@ export async function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/team" className="hover:text-bg">
+                  Team
+                </Link>
+              </li>
+              <li>
                 <Link href="/safety" className="hover:text-bg">
                   Safety
                 </Link>
@@ -105,6 +110,11 @@ export async function Footer() {
               <li>
                 <Link href="/projects" className="hover:text-bg">
                   All Projects
+                </Link>
+              </li>
+              <li>
+                <Link href="/gallery" className="hover:text-bg">
+                  Gallery
                 </Link>
               </li>
               <li>

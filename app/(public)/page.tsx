@@ -11,6 +11,7 @@ import { ProjectGallery } from "@/components/marketing/ProjectGallery";
 import { getSiteSettings } from "@/lib/settings";
 import { getPublishedProjects, getCertifications } from "@/lib/supabase/queries";
 import { SERVICE_CATEGORY } from "@/lib/service-category";
+import { SERVICE_ICON } from "@/lib/service-icons";
 import { mdMessage, services } from "@/content/site-copy";
 import { buildMetadata } from "@/lib/seo/metadata";
 import { Reveal } from "@/components/marketing/Reveal";
@@ -121,6 +122,7 @@ export default async function Home() {
                 title={service.name}
                 description={service.description || undefined}
                 href={`/projects?category=${(SERVICE_CATEGORY[service.name] ?? "").toLowerCase()}`}
+                icon={SERVICE_ICON[service.name]}
               />
             ))}
           </div>
