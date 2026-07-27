@@ -53,11 +53,15 @@ export async function getPublishedProjects(): Promise<Project[]> {
   if (!isSupabaseConfigured()) return [];
 
   const supabase = createClient();
-  const { data } = await supabase
+  const { data, error } = await supabase
     .from("projects")
     .select("slug, title, client, cost, year, category")
     .eq("published", true)
     .order("created_at", { ascending: true });
+
+  if (error) {
+    console.error("getPublishedProjects: Supabase query failed", error);
+  }
 
   return data ?? [];
 }
@@ -68,12 +72,19 @@ export async function getProjectBySlug(
   if (!isSupabaseConfigured()) return null;
 
   const supabase = createClient();
-  const { data } = await supabase
+  const { data, error } = await supabase
     .from("projects")
     .select("slug, title, client, cost, year, category, write_up, images")
     .eq("slug", slug)
     .eq("published", true)
     .single();
+
+  // PGRST116 = "no rows" from .single() — a normal 404 (bad/unpublished
+  // slug), not a failure worth logging. Anything else (auth, RLS, network)
+  // is a real problem and should surface.
+  if (error && error.code !== "PGRST116") {
+    console.error(`getProjectBySlug(${slug}): Supabase query failed`, error);
+  }
 
   if (!data) return null;
 
@@ -131,10 +142,14 @@ export async function getCertifications(): Promise<Certification[]> {
   if (!isSupabaseConfigured()) return [];
 
   const supabase = createClient();
-  const { data } = await supabase
+  const { data, error } = await supabase
     .from("certifications")
     .select("abbr, full_name, description, issuing_body, scan_url, expiry_date")
     .order("sort_order", { ascending: true });
+
+  if (error) {
+    console.error("getCertifications: Supabase query failed", error);
+  }
 
   return (data ?? []).map((c) => ({
     abbr: c.abbr,
