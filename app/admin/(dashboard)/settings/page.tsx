@@ -1,4 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
+import { isSupabaseConfigured } from "@/lib/supabase/is-configured";
 import { SettingsForm } from "./SettingsForm";
 import type { SiteSettingsRow } from "./actions";
 
@@ -15,6 +16,11 @@ const EMPTY_SETTINGS: SiteSettingsRow = {
 };
 
 export default async function AdminSettingsPage() {
+  // The layout already blocks unconfigured access at runtime; this only
+  // guards Next's build-time static generation attempt, which runs this
+  // page's body independently of the layout's early return.
+  if (!isSupabaseConfigured()) return null;
+
   const supabase = await createClient();
   const { data: settings } = await supabase
     .from("site_settings")

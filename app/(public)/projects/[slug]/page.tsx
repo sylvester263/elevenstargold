@@ -12,6 +12,10 @@ import { getPublishedProjects, getProjectBySlug } from "@/lib/supabase/queries";
 import { Reveal } from "@/components/marketing/Reveal";
 
 export async function generateStaticParams() {
+  // getPublishedProjects() returns [] when Supabase isn't configured (e.g. a
+  // build without .env.local, since .env* is gitignored), so this degrades
+  // to zero prebuilt paths instead of crashing the build. dynamicParams
+  // defaults to true, so pages still render on-demand at request time.
   const projects = await getPublishedProjects();
   return projects.map((p) => ({ slug: p.slug }));
 }

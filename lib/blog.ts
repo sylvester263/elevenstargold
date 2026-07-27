@@ -1,4 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
+import { isSupabaseConfigured } from "@/lib/supabase/is-configured";
 
 export type RecentPost = { title: string; slug: string };
 
@@ -11,6 +12,8 @@ export type BlogPost = {
 };
 
 export async function getRecentPosts(limit = 3): Promise<RecentPost[]> {
+  if (!isSupabaseConfigured()) return [];
+
   const supabase = await createClient();
   const { data } = await supabase
     .from("blog_posts")
@@ -23,6 +26,8 @@ export async function getRecentPosts(limit = 3): Promise<RecentPost[]> {
 }
 
 export async function getAllPosts(): Promise<BlogPost[]> {
+  if (!isSupabaseConfigured()) return [];
+
   const supabase = await createClient();
   const { data } = await supabase
     .from("blog_posts")

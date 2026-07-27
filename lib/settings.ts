@@ -1,5 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { getLedgerComputedStats } from "@/lib/supabase/queries";
+import { isSupabaseConfigured } from "@/lib/supabase/is-configured";
 
 // Site Settings data model — 03-header-and-footer.md, 05-admin-panel-and-blog.md.
 // Backed by the site_settings singleton row (id=1), editable from
@@ -23,11 +24,18 @@ export type SiteSettings = {
 };
 
 export async function getSiteSettings(): Promise<SiteSettings> {
-  const supabase = await createClient();
-  const [{ data }, computed] = await Promise.all([
-    supabase.from("site_settings").select("*").eq("id", 1).single(),
-    getLedgerComputedStats(),
-  ]);
+  // Degrade to defaults rather than crashing build-time static generation
+  // (e.g. home/about/contact/projects) when Supabase isn't configured.
+  const [{ data }, computed] = isSupabaseConfigured()
+    ? await Promise.all([
+        (await createClient())
+          .from("site_settings")
+          .select("*")
+          .eq("id", 1)
+          .single(),
+        getLedgerComputedStats(),
+      ])
+    : [{ data: null }, await getLedgerComputedStats()];
 
   const editableStats = (data?.ledger_stats ??
     []) as SiteSettings["ledgerStats"];

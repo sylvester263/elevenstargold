@@ -11,12 +11,19 @@
 // there's no session to forward, and generateStaticParams runs at build
 // time with no request context — cookies() throws there.
 import { createClient as createSupabaseClient } from "@supabase/supabase-js";
+import { isSupabaseConfigured } from "@/lib/supabase/is-configured";
 
 function createClient() {
-  return createSupabaseClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-  );
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+  if (!url || !key) {
+    throw new Error(
+      "Missing Supabase env vars: NEXT_PUBLIC_SUPABASE_URL / NEXT_PUBLIC_SUPABASE_ANON_KEY are not set. Check .env.local for local dev, or your build/deploy environment configuration (these are required at build time because generateStaticParams for /projects/[slug] queries Supabase).",
+    );
+  }
+
+  return createSupabaseClient(url, key);
 }
 
 export type ProjectCategory =
@@ -43,6 +50,8 @@ export type ProjectDetail = Project & {
 };
 
 export async function getPublishedProjects(): Promise<Project[]> {
+  if (!isSupabaseConfigured()) return [];
+
   const supabase = createClient();
   const { data } = await supabase
     .from("projects")
@@ -56,6 +65,8 @@ export async function getPublishedProjects(): Promise<Project[]> {
 export async function getProjectBySlug(
   slug: string,
 ): Promise<ProjectDetail | null> {
+  if (!isSupabaseConfigured()) return null;
+
   const supabase = createClient();
   const { data } = await supabase
     .from("projects")
@@ -112,6 +123,13 @@ export type Certification = {
 };
 
 export async function getCertifications(): Promise<Certification[]> {
+  // /certifications has no dynamic API usage (no params/cookies), so Next
+  // attempts to statically prerender it at build time — unlike
+  // /projects/[slug], there's no generateStaticParams to skip here. Same
+  // build-safety guard as /projects/[slug]: degrade to an empty list rather
+  // than crashing the build when Supabase isn't configured.
+  if (!isSupabaseConfigured()) return [];
+
   const supabase = createClient();
   const { data } = await supabase
     .from("certifications")

@@ -1,9 +1,15 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
+import { isSupabaseConfigured } from "@/lib/supabase/is-configured";
 import { DeleteButton } from "@/components/admin/DeleteButton";
 import { deleteProject } from "./actions";
 
 export default async function AdminProjectsListPage() {
+  // The layout already blocks unconfigured access at runtime; this only
+  // guards Next's build-time static generation attempt, which runs this
+  // page's body independently of the layout's early return.
+  if (!isSupabaseConfigured()) return null;
+
   const supabase = await createClient();
   const { data: projects } = await supabase
     .from("projects")
