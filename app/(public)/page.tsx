@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
@@ -195,10 +196,15 @@ export default async function Home() {
       <Reveal>
         <Section>
           <div className="grid grid-cols-2 items-center gap-16 max-[880px]:grid-cols-1">
-            <div
-              className="aspect-[3/3.6] w-full max-w-sm border border-line bg-[repeating-linear-gradient(135deg,var(--line)_0,var(--line)_1px,transparent_1px,transparent_12px)]"
-              aria-hidden="true"
-            />
+            <div className="w-full max-w-sm overflow-hidden border border-line">
+              <Image
+                src="/images/team/asif-nemat.webp"
+                alt="Asif Nemat, Managing Director / CEO of Eleven Star Gold"
+                width={600}
+                height={800}
+                className="aspect-[3/4] w-full object-cover"
+              />
+            </div>
             <div>
               <p className="text-xs tracking-[0.14em] text-orange uppercase">
                 From the Managing Director
