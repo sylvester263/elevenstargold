@@ -77,7 +77,13 @@ function Lattice() {
   return (
     <group ref={group}>
       <lineSegments geometry={geometry}>
-        <lineBasicMaterial color="#ff6600" transparent opacity={0.22} />
+        {/* Neutral gray, not the brand orange — orange is reserved for
+            interactive/accent elements elsewhere on the page. Opacity is a
+            touch higher than the orange version was (0.22) because a
+            gray-on-charcoal line only has luminance contrast to read by,
+            no hue difference, so it needs the extra weight to stay legible
+            rather than flat. */}
+        <lineBasicMaterial color="#999999" transparent opacity={0.32} />
       </lineSegments>
     </group>
   );
