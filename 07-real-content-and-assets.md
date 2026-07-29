@@ -18,7 +18,8 @@ there.
 - Web: www.elevenstar.pk
 - Email: info@elevenstar.pk
 - Phone: +92 333 6288862, +92 345 6342284
-- MD / CEO: Asif Nemat
+- CEO: Asif Nemat
+- Co-Partner: Sir Atif Nemat
 
 ## MD message — full text (use in full on `/about`)
 
@@ -51,7 +52,7 @@ there.
 > of success.
 >
 > **Asif Nemat**
-> Managing Director / CEO
+> CEO
 
 **Homepage short pull-quote** (already in the mockup, keep using this
 excerpt only — not the full letter — in the hero and MD-section preview):

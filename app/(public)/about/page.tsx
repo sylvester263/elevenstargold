@@ -45,13 +45,13 @@ export default async function AboutPage() {
 
       <Reveal>
         <Section className="border-t border-line">
-          <SectionHeader eyebrow="From the owner" heading="Message from the MD" />
+          <SectionHeader eyebrow="From the owner" heading="Message from the CEO" />
           <div className="mt-8 max-w-3xl">
             <p className="whitespace-pre-line text-ink">
               {mdMessage.fullLetter}
             </p>
             <p className="mt-6 font-mono text-sm text-muted">
-              {company.md} — Managing Director / CEO
+              {company.md} — CEO
             </p>
           </div>
         </Section>

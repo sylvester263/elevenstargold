@@ -64,11 +64,15 @@ exact strings from `07-real-content-and-assets.md`, don't rewrite them.
   three-up stat cards. Links through to `/safety` for the full policy text.
 
 ## 8. MD message
-- Portrait placeholder + pull quote + signature block.
+- Two stacked blocks, same layout: portrait + pull quote + signature block,
+  for Asif Nemat (CEO) then Sir Atif Nemat (Co-Partner).
 - **Real image requirement:** replace the gradient portrait block with an
-  actual photo of Asif Nemat (MD/CEO) if the client provides one and
-  approves its use publicly. If not provided, keep the styled placeholder —
-  do not use a stock "businessman" photo.
+  actual photo if the client provides one and approves its use publicly. If
+  not provided, keep the styled placeholder — do not use a stock
+  "businessman" photo.
+- A third leadership block for the Managing Director will be added in a
+  future update once that person is confirmed — do not add a placeholder
+  for it now.
 
 ## 9. Footer CTA + footer
 - See `03-header-and-footer.md`.

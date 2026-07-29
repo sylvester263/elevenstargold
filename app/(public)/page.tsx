@@ -12,7 +12,7 @@ import { getSiteSettings } from "@/lib/settings";
 import { getPublishedProjects, getCertifications } from "@/lib/supabase/queries";
 import { SERVICE_CATEGORY } from "@/lib/service-category";
 import { SERVICE_ICON } from "@/lib/service-icons";
-import { mdMessage, services } from "@/content/site-copy";
+import { atifMessage, mdMessage, services } from "@/content/site-copy";
 import { buildMetadata, SITE_NAME, SITE_URL } from "@/lib/seo/metadata";
 import { generalContractorSchema } from "@/lib/seo/schema";
 import { Reveal } from "@/components/marketing/Reveal";
@@ -94,7 +94,7 @@ export default async function Home() {
                 “{mdMessage.pullQuote}”
               </blockquote>
               <p className="mt-4 font-mono text-sm text-orange">
-                — Asif Nemat, Managing Director
+                — Asif Nemat, CEO
               </p>
             </div>
           </div>
@@ -206,14 +206,14 @@ export default async function Home() {
         </Reveal>
       </section>
 
-      {/* 8. MD message */}
+      {/* 8. Leadership messages */}
       <Reveal>
         <Section>
           <div className="grid grid-cols-2 items-center gap-16 max-[880px]:grid-cols-1">
             <div className="w-full max-w-sm overflow-hidden border border-line">
               <Image
                 src="/images/team/asif-nemat.webp"
-                alt="Asif Nemat, Managing Director / CEO of Eleven Star Gold"
+                alt="Asif Nemat, CEO of Eleven Star Gold"
                 width={600}
                 height={800}
                 className="aspect-[3/4] w-full object-cover"
@@ -221,13 +221,36 @@ export default async function Home() {
             </div>
             <div>
               <p className="text-xs tracking-[0.14em] text-orange uppercase">
-                From the Managing Director
+                From the CEO
               </p>
               <blockquote className="mt-4 text-2xl text-ink">
                 “{mdMessage.pullQuote}”
               </blockquote>
               <p className="mt-6 font-mono text-sm text-muted">
-                Asif Nemat — Managing Director / CEO
+                Asif Nemat — CEO
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-16 grid grid-cols-2 items-center gap-16 max-[880px]:grid-cols-1">
+            <div className="w-full max-w-sm overflow-hidden border border-line">
+              <Image
+                src="/images/team/atif-nemat.jpg"
+                alt="Sir Atif Nemat, Co-Partner of Eleven Star Gold"
+                width={600}
+                height={800}
+                className="aspect-[3/4] w-full object-cover"
+              />
+            </div>
+            <div>
+              <p className="text-xs tracking-[0.14em] text-orange uppercase">
+                From the Co-Partner
+              </p>
+              <blockquote className="mt-4 text-2xl text-ink">
+                “{atifMessage.pullQuote}”
+              </blockquote>
+              <p className="mt-6 font-mono text-sm text-muted">
+                Sir Atif Nemat — Co-Partner
               </p>
             </div>
           </div>

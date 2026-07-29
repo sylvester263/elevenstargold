@@ -29,6 +29,13 @@ Our current strategy is focused on becoming Pakistan's leading Engineering and P
 As we move forward, I am confident that our dedicated team of professionals at ELEVEN STAR GOLD will elevate the company to new heights of success.`,
 };
 
+// Co-Partner's homepage pull-quote, shown directly below the CEO's message
+// block in the same layout — 04-homepage-sections.md.
+export const atifMessage = {
+  pullQuote:
+    "We believe that the quality of a project is decided long before ground is broken — in careful planning, close client collaboration, and uncompromising safety on every site.",
+};
+
 // A short history paragraph derived from the MD letter's opening (per
 // 09-launch-fixes.md P1 #6: "use the MD message's opening paragraphs as a
 // basis") rather than a separate invented narrative.
