@@ -140,6 +140,11 @@ create table if not exists public.site_settings (
   -- [{ "value": "46+", "label": "contracts delivered" }, ...]
   ledger_stats jsonb not null default '[]'::jsonb,
   trust_bar_clients text[] not null default '{}',
+  -- Admin-typed override for the "contracts delivered" stat. Empty string
+  -- falls back to the live COUNT(projects) computed value (09-launch-fixes.md
+  -- P0-2) — set this when the real historical total exceeds what's entered
+  -- in the Projects table.
+  contracts_delivered_override text not null default '',
   updated_at timestamptz not null default now()
 );
 

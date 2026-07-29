@@ -102,6 +102,22 @@ export function SettingsForm({ settings }: { settings: SiteSettingsRow }) {
           contract&quot; are computed automatically from published projects
           and aren&apos;t edited here.
         </p>
+        <div className="flex flex-col gap-2">
+          <Label htmlFor="contractsDeliveredOverride">
+            Contracts delivered override
+          </Label>
+          <Input
+            id="contractsDeliveredOverride"
+            name="contractsDeliveredOverride"
+            defaultValue={settings.contracts_delivered_override}
+            placeholder="Leave blank to show the live published-projects count"
+          />
+          <p className="text-xs text-muted">
+            Set this when the real historical total (e.g. &quot;600+&quot;)
+            exceeds what&apos;s entered in the Projects table. Leave blank to
+            fall back to the live count.
+          </p>
+        </div>
         <div className="grid grid-cols-2 gap-5">
           {ledgerStats.map((stat, i) => (
             <div key={i} className="flex gap-3">

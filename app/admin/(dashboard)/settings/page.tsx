@@ -13,6 +13,7 @@ const EMPTY_SETTINGS: SiteSettingsRow = {
   social_links: [],
   ledger_stats: [],
   trust_bar_clients: [],
+  contracts_delivered_override: "",
 };
 
 export default async function AdminSettingsPage() {

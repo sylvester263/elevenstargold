@@ -20,9 +20,11 @@ export type SiteSettings = {
   whatsappNumber: string;
   whatsappDefaultMessage: string;
   socialLinks: { platform: SocialPlatform; url: string }[];
-  // [0]/[1] ("contracts delivered"/"largest single contract") are always
-  // computed live from the Projects table, never admin-typed — 09-launch-
-  // fixes.md P0-2. [2]/[3] are the remaining admin-editable cells stored in
+  // [0]/[1] ("contracts delivered"/"largest single contract") are computed
+  // live from the Projects table by default — 09-launch-fixes.md P0-2 — but
+  // [0]'s value can be overridden via site_settings.contracts_delivered_override
+  // (e.g. the real historical total exceeds what's entered in the Projects
+  // table). [2]/[3] are the remaining admin-editable cells stored in
   // site_settings.ledger_stats.
   ledgerStats: { value: string; label: string }[];
   trustBarClients: string[];
@@ -53,7 +55,10 @@ export async function getSiteSettings(): Promise<SiteSettings> {
     whatsappDefaultMessage: data?.whatsapp_default_message ?? "",
     socialLinks: (data?.social_links ?? []) as SiteSettings["socialLinks"],
     ledgerStats: [
-      { value: String(computed.contractsDelivered), label: "contracts delivered" },
+      {
+        value: data?.contracts_delivered_override || String(computed.contractsDelivered),
+        label: "contracts delivered",
+      },
       { value: computed.largestContract, label: "largest single contract" },
       ...editableStats,
     ],

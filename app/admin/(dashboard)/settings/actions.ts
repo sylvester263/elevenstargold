@@ -18,6 +18,7 @@ export type SiteSettingsRow = {
   social_links: { platform: string; url: string }[];
   ledger_stats: { value: string; label: string }[];
   trust_bar_clients: string[];
+  contracts_delivered_override: string;
 };
 
 const PLATFORMS = ["facebook", "instagram", "linkedin", "youtube"] as const;
@@ -52,6 +53,10 @@ export async function updateSettings(
     .map((c) => c.trim())
     .filter(Boolean);
 
+  const contractsDeliveredOverride = String(
+    formData.get("contractsDeliveredOverride") ?? "",
+  ).trim();
+
   const supabase = await createClient();
   const { error } = await supabase
     .from("site_settings")
@@ -64,6 +69,7 @@ export async function updateSettings(
       social_links: socialLinks,
       ledger_stats: ledgerStats,
       trust_bar_clients: trustBarClients,
+      contracts_delivered_override: contractsDeliveredOverride,
     })
     .eq("id", 1);
 
