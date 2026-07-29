@@ -26,6 +26,13 @@ export const metadata: Metadata = buildMetadata({
   path: "/",
 });
 
+// Was fully dynamic (re-rendered + re-queried Supabase on every request —
+// Batch A audit found this as the single largest contributor to slow TTFB).
+// ISR-caches the rendered page for 5 minutes; admin's server actions call
+// revalidatePath("/", "layout") on save so edits still show up immediately
+// rather than waiting out the window.
+export const revalidate = 300;
+
 export default async function Home() {
   const [settings, projects, certifications] = await Promise.all([
     getSiteSettings(),

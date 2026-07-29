@@ -13,6 +13,10 @@ export const metadata: Metadata = buildMetadata({
   path: "/team",
 });
 
+// See app/(public)/page.tsx for why — ISR-caches this page instead of
+// re-rendering + re-querying Supabase on every request.
+export const revalidate = 300;
+
 export default async function TeamPage() {
   const members = await getTeamMembers();
 
@@ -43,6 +47,7 @@ export default async function TeamPage() {
                         alt={member.name}
                         width={400}
                         height={400}
+                        sizes="(max-width: 600px) 100vw, (max-width: 880px) 50vw, 33vw"
                         className="h-full w-full object-cover"
                       />
                     ) : (

@@ -58,6 +58,7 @@ export async function createProject(
   if (error) return { status: "error", message: error.message };
 
   revalidatePath("/admin/projects");
+  revalidatePath("/", "layout");
   redirect("/admin/projects");
 }
 
@@ -77,6 +78,7 @@ export async function updateProject(
   if (error) return { status: "error", message: error.message };
 
   revalidatePath("/admin/projects");
+  revalidatePath("/", "layout");
   redirect("/admin/projects");
 }
 
@@ -84,4 +86,5 @@ export async function deleteProject(id: string) {
   const supabase = await createClient();
   await supabase.from("projects").delete().eq("id", id);
   revalidatePath("/admin/projects");
+  revalidatePath("/", "layout");
 }

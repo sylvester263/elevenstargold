@@ -13,6 +13,12 @@ export const metadata: Metadata = buildMetadata({
   path: "/contact",
 });
 
+// See app/(public)/page.tsx for why — ISR-caches this page instead of
+// re-rendering + re-querying Supabase on every request. The contact form
+// itself is a client component posting to a server action, unaffected by
+// caching the page shell around it.
+export const revalidate = 300;
+
 export default async function ContactPage() {
   const settings = await getSiteSettings();
   const mapQuery = encodeURIComponent(settings.officeAddress);

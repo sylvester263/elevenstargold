@@ -10,6 +10,10 @@ export const metadata: Metadata = buildMetadata({
   path: "/blog",
 });
 
+// See app/(public)/page.tsx for why — ISR-caches this page instead of
+// re-rendering on every request.
+export const revalidate = 300;
+
 export default async function BlogIndexPage() {
   const posts = await getAllPosts();
 

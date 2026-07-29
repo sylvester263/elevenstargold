@@ -14,6 +14,10 @@ export const metadata: Metadata = buildMetadata({
   path: "/projects",
 });
 
+// See app/(public)/page.tsx for why — ISR-caches this page instead of
+// re-rendering + re-querying Supabase on every request.
+export const revalidate = 300;
+
 const CATEGORY_LABELS = [
   "Education",
   "Healthcare",

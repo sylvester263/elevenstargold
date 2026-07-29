@@ -11,6 +11,10 @@ import { slugify } from "@/lib/slug";
 import { getPublishedProjects, getProjectBySlug } from "@/lib/supabase/queries";
 import { Reveal } from "@/components/marketing/Reveal";
 
+// See app/(public)/page.tsx for why — ISR-caches this page instead of
+// re-rendering + re-querying Supabase on every request.
+export const revalidate = 300;
+
 export async function generateStaticParams() {
   // getPublishedProjects() returns [] when Supabase isn't configured (e.g. a
   // build without .env.local, since .env* is gitignored), so this degrades
@@ -93,6 +97,7 @@ export default async function ProjectDetailPage({
               src={heroImage.url}
               alt={heroImage.alt}
               fill
+              sizes="(max-width: 1160px) 100vw, 1160px"
               className="object-cover"
             />
           </div>

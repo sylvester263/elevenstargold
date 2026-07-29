@@ -19,6 +19,10 @@ export const metadata: Metadata = buildMetadata({
   path: "/about",
 });
 
+// See app/(public)/page.tsx for why — ISR-caches this page instead of
+// re-rendering + re-querying Supabase on every request.
+export const revalidate = 300;
+
 export default async function AboutPage() {
   const settings = await getSiteSettings();
 

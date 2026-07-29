@@ -14,6 +14,10 @@ export const metadata: Metadata = buildMetadata({
   path: "/certifications",
 });
 
+// See app/(public)/page.tsx for why — ISR-caches this page instead of
+// re-rendering + re-querying Supabase on every request.
+export const revalidate = 300;
+
 export default async function CertificationsPage() {
   const certifications = await getCertifications();
 
@@ -51,6 +55,7 @@ export default async function CertificationsPage() {
                       src={cert.scanUrl}
                       alt={`${cert.fullName} scan`}
                       fill
+                      sizes="128px"
                       className="object-cover"
                     />
                   </div>

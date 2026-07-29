@@ -86,6 +86,7 @@ export function CertSeal({
               alt={logo.alt}
               width={logo.width}
               height={logo.height}
+              sizes="80px"
               className="h-auto max-h-[60%] w-[78%] object-contain"
             />
           ) : (

@@ -10,21 +10,8 @@
 // @/lib/supabase/server one: every read here is public/anon-readable RLS,
 // there's no session to forward, and generateStaticParams runs at build
 // time with no request context — cookies() throws there.
-import { createClient as createSupabaseClient } from "@supabase/supabase-js";
+import { createClient } from "@/lib/supabase/public";
 import { isSupabaseConfigured } from "@/lib/supabase/is-configured";
-
-function createClient() {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-
-  if (!url || !key) {
-    throw new Error(
-      "Missing Supabase env vars: NEXT_PUBLIC_SUPABASE_URL / NEXT_PUBLIC_SUPABASE_ANON_KEY are not set. Check .env.local for local dev, or your build/deploy environment configuration (these are required at build time because generateStaticParams for /projects/[slug] queries Supabase).",
-    );
-  }
-
-  return createSupabaseClient(url, key);
-}
 
 export type ProjectCategory =
   | "Education"

@@ -14,6 +14,10 @@ export const metadata: Metadata = buildMetadata({
   path: "/gallery",
 });
 
+// See app/(public)/page.tsx for why — ISR-caches this page instead of
+// re-rendering + re-querying Supabase on every request.
+export const revalidate = 300;
+
 export default async function GalleryPage() {
   const images = await getGalleryImages();
 
@@ -45,6 +49,7 @@ export default async function GalleryPage() {
                     alt={img.alt}
                     width={400}
                     height={400}
+                    sizes="(max-width: 600px) 50vw, (max-width: 880px) 33vw, 25vw"
                     className="h-full w-full object-cover transition-transform duration-300 ease-out group-hover:scale-[1.06] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
                   />
                 </Link>

@@ -68,6 +68,7 @@ export async function createPost(
   }
 
   revalidatePath("/admin/blog");
+  revalidatePath("/", "layout");
   redirect("/admin/blog");
 }
 
@@ -103,6 +104,7 @@ export async function updatePost(
   }
 
   revalidatePath("/admin/blog");
+  revalidatePath("/", "layout");
   redirect("/admin/blog");
 }
 
@@ -110,4 +112,5 @@ export async function deletePost(id: string) {
   const supabase = await createClient();
   await supabase.from("blog_posts").delete().eq("id", id);
   revalidatePath("/admin/blog");
+  revalidatePath("/", "layout");
 }

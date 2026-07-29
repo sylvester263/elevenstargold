@@ -1,6 +1,10 @@
 import { notFound } from "next/navigation";
 import { getAllPosts } from "@/lib/blog";
 
+// See app/(public)/page.tsx for why — ISR-caches this page instead of
+// re-rendering on every request.
+export const revalidate = 300;
+
 // TODO: real post rendering (Article schema, rich-text body, related links)
 // once the blog CMS exists — 05-admin-panel-and-blog.md, 06-integrations-and-seo.md.
 export default async function BlogPostPage({

@@ -44,6 +44,7 @@ export async function createTeamMember(
   if (error) return { status: "error", message: error.message };
 
   revalidatePath("/admin/team");
+  revalidatePath("/", "layout");
   redirect("/admin/team");
 }
 
@@ -66,6 +67,7 @@ export async function updateTeamMember(
   if (error) return { status: "error", message: error.message };
 
   revalidatePath("/admin/team");
+  revalidatePath("/", "layout");
   redirect("/admin/team");
 }
 
@@ -73,4 +75,5 @@ export async function deleteTeamMember(id: string) {
   const supabase = await createClient();
   await supabase.from("team_members").delete().eq("id", id);
   revalidatePath("/admin/team");
+  revalidatePath("/", "layout");
 }

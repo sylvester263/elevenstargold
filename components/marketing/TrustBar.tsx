@@ -88,6 +88,7 @@ export function TrustBar({ clients }: { clients: string[] }) {
               alt={logo.alt}
               width={logo.width}
               height={logo.height}
+              sizes="200px"
               className={`h-12 w-auto object-contain${logo.circular ? " rounded-full" : ""}`}
             />
           );

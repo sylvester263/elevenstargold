@@ -72,5 +72,6 @@ export async function updateSettings(
   }
 
   revalidatePath("/admin/settings");
+  revalidatePath("/", "layout");
   return { status: "success", message: "Settings saved." };
 }

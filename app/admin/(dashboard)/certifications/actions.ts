@@ -46,6 +46,7 @@ export async function createCertification(
   if (error) return { status: "error", message: error.message };
 
   revalidatePath("/admin/certifications");
+  revalidatePath("/", "layout");
   redirect("/admin/certifications");
 }
 
@@ -68,6 +69,7 @@ export async function updateCertification(
   if (error) return { status: "error", message: error.message };
 
   revalidatePath("/admin/certifications");
+  revalidatePath("/", "layout");
   redirect("/admin/certifications");
 }
 
@@ -75,4 +77,5 @@ export async function deleteCertification(id: string) {
   const supabase = await createClient();
   await supabase.from("certifications").delete().eq("id", id);
   revalidatePath("/admin/certifications");
+  revalidatePath("/", "layout");
 }

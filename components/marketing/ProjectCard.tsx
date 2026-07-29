@@ -37,6 +37,7 @@ export function ProjectCard({
             alt={cover.alt || title}
             width={600}
             height={400}
+            sizes="(max-width: 600px) 100vw, (max-width: 880px) 50vw, 33vw"
             className="h-full w-full object-cover transition-transform duration-300 ease-out group-hover:scale-[1.04] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
           />
         ) : (

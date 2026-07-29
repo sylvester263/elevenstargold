@@ -1,4 +1,9 @@
-import { createClient } from "@/lib/supabase/server";
+// Plain anon client, not the cookie-aware @/lib/supabase/server one — see
+// lib/supabase/public.ts for why (Batch A perf audit: this file is called
+// from Footer/WhatsAppButton in the shared public layout, so a cookies()
+// dependency here was forcing every public page on the site into dynamic
+// rendering, making per-page `revalidate` exports inert).
+import { createClient } from "@/lib/supabase/public";
 import { getLedgerComputedStats } from "@/lib/supabase/queries";
 import { isSupabaseConfigured } from "@/lib/supabase/is-configured";
 
@@ -28,7 +33,7 @@ export async function getSiteSettings(): Promise<SiteSettings> {
   // (e.g. home/about/contact/projects) when Supabase isn't configured.
   const [{ data }, computed] = isSupabaseConfigured()
     ? await Promise.all([
-        (await createClient())
+        createClient()
           .from("site_settings")
           .select("*")
           .eq("id", 1)

@@ -1,4 +1,6 @@
-import { createClient } from "@/lib/supabase/server";
+// Plain anon client — see lib/supabase/public.ts for why (Batch A perf
+// audit: cookies() here was forcing dynamic rendering site-wide).
+import { createClient } from "@/lib/supabase/public";
 import { isSupabaseConfigured } from "@/lib/supabase/is-configured";
 
 export type RecentPost = { title: string; slug: string };
@@ -14,7 +16,7 @@ export type BlogPost = {
 export async function getRecentPosts(limit = 3): Promise<RecentPost[]> {
   if (!isSupabaseConfigured()) return [];
 
-  const supabase = await createClient();
+  const supabase = createClient();
   const { data } = await supabase
     .from("blog_posts")
     .select("title, slug")
@@ -28,7 +30,7 @@ export async function getRecentPosts(limit = 3): Promise<RecentPost[]> {
 export async function getAllPosts(): Promise<BlogPost[]> {
   if (!isSupabaseConfigured()) return [];
 
-  const supabase = await createClient();
+  const supabase = createClient();
   const { data } = await supabase
     .from("blog_posts")
     .select("title, slug, excerpt, category, published_at")
