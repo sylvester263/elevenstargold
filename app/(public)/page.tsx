@@ -243,7 +243,7 @@ export default async function Home() {
             <div className="w-full max-w-sm overflow-hidden border border-line">
               <Image
                 src="/images/team/atif-nemat.jpg"
-                alt="Sir Atif Nemat, Co-Partner of Eleven Star Gold"
+                alt="Sir Atif Naimat, Co-Partner of Eleven Star Gold"
                 width={600}
                 height={800}
                 className="aspect-[3/4] w-full object-cover"
@@ -257,7 +257,7 @@ export default async function Home() {
                 “{atifMessage.pullQuote}”
               </blockquote>
               <p className="mt-6 font-mono text-sm text-muted">
-                Sir Atif Nemat — Co-Partner
+                Sir Atif Naimat — Co-Partner
               </p>
             </div>
           </div>

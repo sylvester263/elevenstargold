@@ -19,7 +19,7 @@ there.
 - Email: info@elevenstar.pk
 - Phone: +92 333 6288862, +92 345 6342284
 - CEO: Asif Nemat
-- Co-Partner: Sir Atif Nemat
+- Co-Partner: Sir Atif Naimat
 
 ## MD message — full text (use in full on `/about`)
 
