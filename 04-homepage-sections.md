@@ -65,7 +65,7 @@ exact strings from `07-real-content-and-assets.md`, don't rewrite them.
 
 ## 8. MD message
 - Two stacked blocks, same layout: portrait + pull quote + signature block,
-  for Asif Nemat (CEO) then Sir Atif Naimat (Co-Partner).
+  for Asif Nemat (CEO) then Atif Naimat (Co-Partner).
 - **Real image requirement:** replace the gradient portrait block with an
   actual photo if the client provides one and approves its use publicly. If
   not provided, keep the styled placeholder — do not use a stock
