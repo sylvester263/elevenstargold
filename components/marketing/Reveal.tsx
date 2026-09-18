@@ -23,6 +23,10 @@ export function Reveal({
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      // matchMedia only exists client-side, so reduced-motion can't be
+      // detected during render — must start hidden on both server and
+      // first client render to avoid a hydration mismatch.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setVisible(true);
       return;
     }

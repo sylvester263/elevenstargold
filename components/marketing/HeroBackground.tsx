@@ -73,6 +73,10 @@ export function HeroBackground() {
       return;
     }
 
+    // Feature detection (matchMedia/innerWidth/WebGL2) only exists client-side
+    // and must start false on both server and first client render to avoid a
+    // hydration mismatch, so this can't be computed during render.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setEnabled(true);
   }, []);
 

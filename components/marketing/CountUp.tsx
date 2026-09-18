@@ -15,10 +15,17 @@ export function CountUp({
 }) {
   const ref = useRef<HTMLSpanElement>(null);
   const [display, setDisplay] = useState(value);
+  const [prevValue, setPrevValue] = useState(value);
   const numeric = /^\d+$/.test(value) ? parseInt(value, 10) : null;
 
-  useEffect(() => {
+  // Reset display when the value prop changes, without an effect —
+  // https://react.dev/learn/you-might-not-need-an-effect#adjusting-some-state-when-a-prop-changes
+  if (value !== prevValue) {
+    setPrevValue(value);
     setDisplay(value);
+  }
+
+  useEffect(() => {
     if (numeric === null) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
